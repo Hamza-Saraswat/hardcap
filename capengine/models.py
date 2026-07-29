@@ -116,10 +116,15 @@ class Team:
     tpes_prior_year: list[int] = field(default_factory=list)
     # Seasons already finished over the second apron, for draft-penalty questions.
     seasons_over_second_apron: int = 0
+    # Lets a scenario supply its own thresholds instead of the published ones. Anti-staleness
+    # training examples depend on this: they paste a constants block whose figures differ
+    # from any real season, and the ground truth must be computed from those pasted numbers
+    # so the model is rewarded for reading rather than recalling.
+    constants_override: SeasonConstants | None = None
 
     @property
     def constants(self) -> SeasonConstants:
-        return get_season(self.season)
+        return self.constants_override or get_season(self.season)
 
     @property
     def roster_count(self) -> int:

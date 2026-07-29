@@ -200,26 +200,43 @@ def _evaluate_side(side: TradeSide, result: TradeResult, trace: Trace) -> None:
         )
 
     # -- hard caps triggered by this trade --------------------------------------------
+    # One trade can trigger more than one hard cap: taking back over 100% caps a team at
+    # the first apron, while aggregating caps it at the second. When both fire, the tighter
+    # cap governs -- so collect every trigger rather than letting the last one overwrite
+    # the others.
+    triggered: list[HardCap] = []
     if not team.is_over_first_apron and incoming > outgoing and side.using_tpe is None:
-        hard_cap_triggered = HardCap.FIRST_APRON
+        triggered.append(HardCap.FIRST_APRON)
         trace.add(
             f"{team.name} hard-capped at the first apron",
             k.first_apron,
             detail="took back more than 100% of outgoing salary",
         )
     if aggregating and not team.is_over_second_apron:
-        hard_cap_triggered = HardCap.SECOND_APRON
+        triggered.append(HardCap.SECOND_APRON)
         trace.add(
             f"{team.name} hard-capped at the second apron",
             k.second_apron,
             detail="aggregated two or more salaries in one trade",
         )
     if side.cash_sent > 0 and not team.is_over_second_apron:
-        hard_cap_triggered = HardCap.SECOND_APRON
+        triggered.append(HardCap.SECOND_APRON)
         trace.add(
             f"{team.name} hard-capped at the second apron",
             k.second_apron,
             detail="sent cash in a trade",
+        )
+    hard_cap_triggered = (
+        HardCap.FIRST_APRON
+        if HardCap.FIRST_APRON in triggered
+        else HardCap.SECOND_APRON
+        if triggered
+        else HardCap.NONE
+    )
+    if len(triggered) > 1:
+        trace.add(
+            "Two hard caps triggered -- the tighter one governs",
+            k.first_apron if hard_cap_triggered is HardCap.FIRST_APRON else k.second_apron,
         )
 
     # -- post-trade position ----------------------------------------------------------
