@@ -22,11 +22,14 @@ probe = tokenizer.apply_chat_template(
 print("chat template renders:", len(probe), "chars")
 
 try:
-    import unsloth  # noqa: F401
+    import unsloth
 
-    print("unsloth imports alongside upgraded transformers")
+    print("unsloth:", getattr(unsloth, "__version__", "unknown"), "-- imports cleanly")
 except Exception as exc:  # noqa: BLE001
     print("UNSLOTH BROKE:", exc)
     sys.exit(2)
 
+import torch
+
+print("torch:", torch.__version__, "| cuda:", torch.cuda.is_available())
 print("OK")

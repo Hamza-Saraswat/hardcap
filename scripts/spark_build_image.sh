@@ -10,12 +10,17 @@ set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 MODELS_DIR="${MODELS_DIR:-$HOME/hardcap-work/models}"
 
-echo "=== probe: upgrade transformers in a throwaway container ==="
+# Upgrading transformers alone is a silent no-op: the installed unsloth pins it, so pip
+# resolves "latest satisfying the pin" -- the same version. The trio moves together, and
+# pip's output stays visible so a failed resolve can never masquerade as success again.
+UPGRADE="pip install -U unsloth unsloth_zoo transformers 2>&1 | tail -3"
+
+echo "=== probe: upgrade unsloth + transformers in a throwaway container ==="
 docker run --rm --entrypoint bash \
     -v "$MODELS_DIR":/models -e HF_HOME=/models \
     -v "$REPO/scripts":/probe \
     unsloth/unsloth:dgxspark-latest \
-    -lc "pip install -q -U transformers >/dev/null 2>&1; python /probe/check_qwen_support.py"
+    -lc "$UPGRADE; python /probe/check_qwen_support.py"
 
 if [ "${1:-}" != "--build" ]; then
     echo; echo "probe passed -- rerun with --build to bake the image"
@@ -28,9 +33,10 @@ BUILD_DIR="$(mktemp -d)"
 trap 'rm -rf "$BUILD_DIR"' EXIT
 cat > "$BUILD_DIR/Dockerfile" <<'EOF'
 FROM unsloth/unsloth:dgxspark-latest
-# The base image predates the Qwen3.6 architecture. Upgrade only the pure-Python layer;
-# torch / bitsandbytes / CUDA stay exactly as NVIDIA and Unsloth pinned them for GB10.
-RUN pip install --no-cache-dir -U transformers
+# The base image predates the Qwen3.6 architecture, and its unsloth pins transformers so
+# neither can move alone. Upgrade the pure-Python trio together; torch / bitsandbytes /
+# CUDA stay exactly as NVIDIA built them for GB10.
+RUN pip install --no-cache-dir -U unsloth unsloth_zoo transformers
 EOF
 docker build -t hardcap-train:latest "$BUILD_DIR"
 echo
