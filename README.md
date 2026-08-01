@@ -1,7 +1,7 @@
-# NBA Capologist
+# hardcap
 
-Fine-tuning a local model into an NBA salary cap specialist — the 2023 CBA, the first and
-second aprons, trade legality, exceptions, and roster construction. Trained on a DGX Spark.
+Fine-tuning a local model into a basketball salary cap specialist — the 2023 CBA, the first
+and second aprons, trade legality, exceptions, and roster construction. Trained on a DGX Spark.
 
 ## The idea
 
@@ -29,13 +29,14 @@ win over remembered ones.
 
 The hard part of a rules domain is that plausible-sounding cap math is usually wrong, and a
 model trained on plausible-sounding cap math learns to be confidently wrong. So no figure in
-this dataset comes from a language model:
+this dataset is produced by a language model:
 
 1. **CapEngine** — a deterministic calculator (`capengine/`) — computes the answer and records
    a trace of every step.
-2. A frontier model writes the explanation, and is given only the trace to work from.
-3. **The verifier** re-extracts every dollar figure from that prose and rejects any number the
-   engine did not compute. Failures are sent back with the specific complaint and retried.
+2. A narrator writes the explanation, working only from that trace. This is either a template
+   layer (free, offline) or a frontier model (more varied prose).
+3. **The verifier** re-extracts every dollar figure from the prose and rejects any number the
+   engine did not compute.
 
 Correct arithmetic, natural language, nothing invented. The pattern has precedent —
 SYNTHETIC-1, CraftRTL's "correct-by-construction" data, program-trace reasoning supervision.
@@ -44,47 +45,49 @@ SYNTHETIC-1, CraftRTL's "correct-by-construction" data, program-trace reasoning 
 
 ```
 capengine/    Deterministic 2023 CBA calculator — the ground truth
-datagen/      Scenario sampling, prose generation, numeric verification
+datagen/      Scenario sampling, narration, numeric verification
 training/     Unsloth LoRA/QLoRA on the Spark, plus the runbook
 eval/         Scoring against ground truth: verdicts, arithmetic, grounding, staleness
 serving/      Merge to GGUF, register with Ollama, demo prompts
 docs/         Research reports and the rules reference CapEngine implements
-tests/        117 tests, including golden cases against real transactions
+tests/        172 tests, including golden cases against real transactions
 ```
 
 ## Getting started
 
-Every command below runs from the repository root — `uv run python -m datagen.…` resolves
-modules relative to the working directory, so it will fail with `No module named 'datagen'`
-anywhere else.
-
-```bash
-cd ~/Documents/Projects/Fine_tune
-```
+Every command runs from the repository root — `uv run python -m datagen.…` resolves modules
+relative to the working directory and will fail with `No module named 'datagen'` anywhere else.
 
 ```bash
 uv venv --python 3.12 && uv pip install -e ".[dev]"
 ```
 
 ```bash
-uv run pytest
+uv run python -m pytest
 ```
 
-Inspect the scenario space without spending anything:
+Look at the scenario space, including a full example with its computation trace:
 
 ```bash
 uv run python -m datagen.generate --dry-run --count 500 --show 2
 ```
 
-Generate the dataset (needs `ANTHROPIC_API_KEY`; roughly $30–100 for 10k examples):
+Build the dataset. This needs no API key and no network, and takes about ten seconds:
 
 ```bash
-uv run python -m datagen.generate --count 10000 --out data/generated/domain.jsonl
+uv run python -m datagen.generate --local --count 6000 --out data/generated/domain.jsonl
 ```
 
 ```bash
 uv run python -m datagen.build_dataset --domain data/generated/domain.jsonl --out data/dataset
 ```
+
+Because generation is seeded, the dataset reproduces exactly — which is why 15MB of it isn't
+committed. A readable slice lives in `data/sample/`.
+
+Dropping `--local` (with `ANTHROPIC_API_KEY` set) has a frontier model write the prose
+instead. It reads more naturally and costs roughly $30–100 for 10k examples; the arithmetic
+is identical either way, since both paths are verified against the same traces.
 
 Then move to the Spark — see [training/README.md](training/README.md).
 
@@ -101,9 +104,9 @@ Four measures, scored programmatically against CapEngine:
 | Staleness | Answering from memorized thresholds instead of the pasted ones |
 
 Staleness is reported separately because it is the failure this whole architecture exists to
-prevent. Roughly an eighth of the training set is built to defend against it: the prompt
-carries thresholds from an invented future season, and the ground truth is computed from
-those, so an answer quoting a real-world figure is wrong by construction.
+prevent. Roughly an eighth of the training set defends against it: the prompt carries
+thresholds from an invented future season, and ground truth is computed from those, so an
+answer quoting a real-world figure is wrong by construction.
 
 ## Model choice
 
@@ -118,32 +121,15 @@ whose real constraint is 273 GB/s of memory bandwidth.
 Salary figures and rules are facts, and facts are not copyrightable (*Feist v. Rural*). Two
 hard lines regardless: **Sports Reference forbids AI training on its content** and **Spotrac's
 terms forbid scraping**, so neither is used. Grounding comes from the league's own published
-CBA and CBA 101, with contract data from openly published datasets. Analyst prose is read for
-understanding, never trained on — the pipeline generates its own.
+CBA and CBA 101. Analyst prose is read for understanding, never trained on — the pipeline
+generates its own.
+
+Players in the training data are invented. Attaching fabricated salaries to real players
+would teach the model false facts about the league, which is the exact failure this
+architecture exists to avoid. Real names appear only in the tests, with their real figures.
 
 ## Status
 
-CapEngine and the data pipeline are built and tested. Training, evaluation, and serving
-scripts are written and ready to run on the Spark; nothing in this repo has been executed on
-one yet. Details in [docs/research/](docs/research/).
-
-## Generating the dataset with no API key
-
-The answers can be written from templates instead of a model. Correctness is identical —
-both paths narrate figures CapEngine computed, and both pass through the same verifier — so
-only the prose variety differs.
-
-```bash
-uv run python -m datagen.generate --local --count 6000 --out data/generated/domain.jsonl
-```
-
-```bash
-uv run python -m datagen.build_dataset --domain data/generated/domain.jsonl --out data/dataset
-```
-
-That takes about ten seconds and costs nothing. Because it's seeded, anyone can reproduce the
-identical dataset — which is why the full set isn't committed. A readable slice lives in
-`data/sample/`.
-
-Drop `--local` (and set `ANTHROPIC_API_KEY`) to have a frontier model write the prose instead,
-which reads more naturally at a cost of roughly $30–100 for 10k examples.
+CapEngine, the data pipeline, and a 6,000-example verified dataset are done. Training,
+evaluation, and serving scripts are written and ready to run; nothing has been executed on a
+Spark yet. Background in [docs/research/](docs/research/).
