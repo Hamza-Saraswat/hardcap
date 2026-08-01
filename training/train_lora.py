@@ -146,6 +146,11 @@ def train(
         load_in_4bit=preset.load_in_4bit,
         dtype=torch.bfloat16,
         attn_implementation="sdpa",
+        # GB10 reports its memory as N/A to nvidia-smi, so automatic device mapping
+        # concludes the GPU has no room and spills layers to CPU -- which the 4-bit
+        # quantizer then refuses. Unified memory means everything fits on device 0 by
+        # definition; say so explicitly.
+        device_map={"": 0},
     )
 
     model = FastLanguageModel.get_peft_model(
