@@ -170,6 +170,44 @@ async def generate(
         print(f"\nVerified on the first attempt: {first_pass:.1%}")
 
 
+def generate_local(count: int, out_path: Path, seed: int, kind: str | None) -> None:
+    """Generate the whole set from templates -- no API, no cost, no network.
+
+    Correctness is identical to the API path, since both narrate figures the engine
+    computed and both pass through the same verifier. Only the prose is less varied.
+    """
+    from datagen.narrate import narrate
+
+    rng = random.Random(seed)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    kept: Counter[str] = Counter()
+    dropped: Counter[str] = Counter()
+
+    with out_path.open("w") as out:
+        for index in range(count):
+            scenario = sample(rng, kind=kind)
+            response = narrate(scenario, rng)
+
+            if not verify(scenario, response).ok:
+                dropped[scenario.kind] += 1
+                continue
+
+            out.write(build_example(scenario, response, attempts=1).to_json() + "\n")
+            kept[scenario.kind] += 1
+
+            if (index + 1) % 1000 == 0:
+                print(f"  {index + 1}/{count}", file=sys.stderr, flush=True)
+
+    total = sum(kept.values())
+    print(f"\nWrote {total} verified examples to {out_path}")
+    if sum(dropped.values()):
+        print(f"Dropped {sum(dropped.values())} that failed verification")
+    print("\nBy scenario type:")
+    for name in sorted(kept, key=lambda k: -kept[k]):
+        print(f"  {name:24} {kept[name]:6}  ({kept[name] / total:.1%})"
+              f"   dropped {dropped.get(name, 0)}")
+
+
 def dry_run(count: int, seed: int, kind: str | None, show: int) -> None:
     """Inspect the scenario space without calling the API."""
     rng = random.Random(seed)
@@ -220,10 +258,16 @@ def main() -> None:
                         help="sample scenarios and print stats without calling the API")
     parser.add_argument("--show", type=int, default=2,
                         help="how many full scenarios to print in a dry run")
+    parser.add_argument("--local", action="store_true",
+                        help="narrate from templates instead of the API: free and offline")
     args = parser.parse_args()
 
     if args.dry_run:
         dry_run(args.count, args.seed, args.kind, args.show)
+        return
+
+    if args.local:
+        generate_local(args.count, args.out, args.seed, args.kind)
         return
 
     if not os.environ.get("ANTHROPIC_API_KEY"):

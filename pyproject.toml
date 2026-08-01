@@ -1,7 +1,7 @@
 [project]
-name = "nba-capologist"
+name = "hardcap"
 version = "0.1.0"
-description = "Fine-tuning a local LLM into an NBA salary-cap / second-apron specialist"
+description = "Fine-tuning a local LLM into a basketball salary-cap and apron specialist"
 requires-python = ">=3.12"
 dependencies = [
     "anthropic>=0.40",

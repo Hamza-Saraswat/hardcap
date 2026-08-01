@@ -5,9 +5,12 @@ __pycache__/
 .ruff_cache/
 .env
 
-# Large artifacts — regenerate, don't commit
+# Large artifacts — regenerate, don't commit.
+# The dataset is deterministic from its seed, so committing 15MB of it would be storing
+# something one command reproduces. data/sample/ holds a readable slice instead.
 docs/sources/*.pdf
 data/generated/
+data/dataset/
 outputs/
 *.gguf
 *.safetensors

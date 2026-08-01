@@ -98,8 +98,19 @@ def _numbers_in(text: str) -> set[int]:
 # -- roster construction ----------------------------------------------------------------
 
 
-def player_name(rng: random.Random) -> str:
-    return f"{rng.choice(FIRST_NAMES)} {rng.choice(LAST_NAMES)}"
+def player_name(rng: random.Random, taken: set[str] | None = None) -> str:
+    """Invent a player name, avoiding collisions with a roster already built.
+
+    With 15 roster spots drawn from under a thousand name combinations, duplicates are
+    common enough to matter -- and two players sharing a name makes a trade scenario
+    ambiguous about whose salary is moving.
+    """
+    for _ in range(100):
+        name = f"{rng.choice(FIRST_NAMES)} {rng.choice(LAST_NAMES)}"
+        if taken is None or name not in taken:
+            return name
+    # Exhausted the pool; disambiguate rather than emit a duplicate.
+    return f"{name} Jr."
 
 
 def _salary_ladder(rng: random.Random, target: int, count: int, k: SeasonConstants) -> list[int]:
@@ -175,14 +186,14 @@ def random_team(
         target -= unlikely_total
 
     salaries = _salary_ladder(rng, target, roster, k)
-    contracts = [
-        Contract(
-            player=player_name(rng),
-            salary=salary,
-            years_remaining=rng.randint(1, 4),
+    taken: set[str] = set()
+    contracts = []
+    for salary in salaries:
+        name = player_name(rng, taken)
+        taken.add(name)
+        contracts.append(
+            Contract(player=name, salary=salary, years_remaining=rng.randint(1, 4))
         )
-        for salary in salaries
-    ]
 
     if unlikely_total:
         # Spread the incentives across two or three deals, as real cap sheets do.
@@ -727,6 +738,13 @@ def hard_cap_consequence(rng: random.Random) -> Scenario:
     salary = int(max(room, 1) * rng.uniform(0.45, 1.45))
     player = player_name(rng)
     result = evaluate_signing(team, salary, ExceptionType.MINIMUM, player=player)
+    # The room remaining *before* the signing is the figure a GM asks about first, and
+    # evaluate_signing only records the room left afterwards -- so state it explicitly.
+    result.trace.add(
+        f"Room below the {hard_cap.value} hard cap before signing",
+        room,
+        detail=f"{usd(limit)} - {usd(team.apron_salary)}",
+    )
 
     question = (
         f"We're hard-capped at the {hard_cap.value}. Can we add {player} at {usd(salary)}?"

@@ -186,10 +186,16 @@ class Team:
         return threshold - self.apron_salary
 
     def find(self, player: str) -> Contract:
-        for contract in self.contracts:
-            if contract.player.lower() == player.lower():
-                return contract
-        raise KeyError(f"{player!r} is not on {self.name}'s roster")
+        matches = [c for c in self.contracts if c.player.lower() == player.lower()]
+        if not matches:
+            raise KeyError(f"{player!r} is not on {self.name}'s roster")
+        if len(matches) > 1:
+            # Silently taking the first match would misprice any trade naming this player.
+            raise KeyError(
+                f"{player!r} appears {len(matches)} times on {self.name}'s roster; "
+                "names must be unique to identify a contract"
+            )
+        return matches[0]
 
     def without(self, players: list[str]) -> list[Contract]:
         lowered = {p.lower() for p in players}

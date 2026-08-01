@@ -126,3 +126,24 @@ understanding, never trained on — the pipeline generates its own.
 CapEngine and the data pipeline are built and tested. Training, evaluation, and serving
 scripts are written and ready to run on the Spark; nothing in this repo has been executed on
 one yet. Details in [docs/research/](docs/research/).
+
+## Generating the dataset with no API key
+
+The answers can be written from templates instead of a model. Correctness is identical —
+both paths narrate figures CapEngine computed, and both pass through the same verifier — so
+only the prose variety differs.
+
+```bash
+uv run python -m datagen.generate --local --count 6000 --out data/generated/domain.jsonl
+```
+
+```bash
+uv run python -m datagen.build_dataset --domain data/generated/domain.jsonl --out data/dataset
+```
+
+That takes about ten seconds and costs nothing. Because it's seeded, anyone can reproduce the
+identical dataset — which is why the full set isn't committed. A readable slice lives in
+`data/sample/`.
+
+Drop `--local` (and set `ANTHROPIC_API_KEY`) to have a frontier model write the prose instead,
+which reads more naturally at a cost of roughly $30–100 for 10k examples.
