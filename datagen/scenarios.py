@@ -15,6 +15,7 @@ figures are the real ones.
 from __future__ import annotations
 
 import random
+import re
 from dataclasses import dataclass, field
 
 from capengine.constants import SEASONS, SeasonConstants, get_season
@@ -83,16 +84,17 @@ class Scenario:
         )
 
 
-def _numbers_in(text: str) -> set[int]:
-    """Pull dollar figures out of pasted context so the verifier accepts them."""
-    import re
+# A number is either properly comma-grouped ("164,961,000") or a bare run of digits
+# ("3341192"). Matching `[\d,]+` instead would swallow the delimiters in a CSV row --
+# "Achiuwa,3341192,0,1" became 334119201, a figure that appears nowhere, while the real
+# salary went missing. That is a whitelist poisoned in both directions: correct salaries
+# rejected, and an invented number silently accepted.
+_NUMBER_TOKEN = re.compile(r"\d{1,3}(?:,\d{3})+|\d+")
 
-    values: set[int] = set()
-    for match in re.finditer(r"\$?([\d,]{4,})", text):
-        raw = match.group(1).replace(",", "")
-        if raw.isdigit():
-            values.add(int(raw))
-    return values
+
+def _numbers_in(text: str) -> set[int]:
+    """Pull figures out of pasted context so the verifier accepts them."""
+    return {int(m.group(0).replace(",", "")) for m in _NUMBER_TOKEN.finditer(text)}
 
 
 # -- roster construction ----------------------------------------------------------------

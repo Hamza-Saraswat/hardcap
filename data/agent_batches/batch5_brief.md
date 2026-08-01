@@ -25,7 +25,7 @@ natural language -- the way a sharp front-office analyst would say it to a gener
 
 ## Output format
 
-Write one JSON object per line to `data/agent_batches/batch5_responses.jsonl`, nothing else in the file:
+Write one JSON object per line to `/tmp/rexport/batch5_responses.jsonl`, nothing else in the file:
 
     {"id": 0, "response": "**Verdict: ILLEGAL.** ..."}
 

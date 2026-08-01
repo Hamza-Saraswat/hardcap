@@ -96,19 +96,29 @@ def verify(scenario: Scenario, response: str, strict_verdict: bool = True) -> Ve
     )
 
 
+_EXPLICIT_VERDICT = re.compile(
+    r"verdict[:\s*]*\**\s*(legal|illegal|allowed|not allowed)", re.IGNORECASE
+)
+
+
 def _verdict_matches(verdict: str, response: str) -> bool:
     """Confirm the answer opens on the right side of a yes/no question.
 
-    Only the opening is examined: a legal-trade answer may well go on to mention what would
-    have been illegal, and that should not count against it.
+    An explicit "**Verdict: LEGAL.**" line settles it outright. Only when one is missing do
+    we fall back to scanning the opening for sentiment, and that fallback is deliberately
+    narrow: over a wide window, bare substrings like "no," fire on innocuous clauses and
+    flip a correct answer to a failure.
     """
-    head = response[:400].lower()
-    negative_markers = (
-        "illegal", "not legal", "can't", "cannot", "not allowed", "no -", "no,", "blocked",
-    )
-    positive_markers = ("legal", "allowed", "yes", "works", "can ")
-
     wants_negative = verdict.upper() in {"ILLEGAL", "NOT ALLOWED"}
+
+    explicit = _EXPLICIT_VERDICT.search(response[:400])
+    if explicit:
+        stated_negative = explicit.group(1).lower() in {"illegal", "not allowed"}
+        return stated_negative == wants_negative
+
+    head = response[:200].lower()
+    negative_markers = ("illegal", "not legal", "can't", "cannot", "not allowed", "blocked")
+    positive_markers = ("legal", "allowed", "yes", "works", "can ")
     has_negative = any(m in head for m in negative_markers)
     has_positive = any(m in head for m in positive_markers)
 
