@@ -1,6 +1,45 @@
 """Tests for eval scoring -- especially reading a verdict out of natural prose."""
 
-from eval.harness import read_verdict, score_response, summarize
+from eval.harness import read_verdict, score_response, strip_thinking, summarize
+
+
+def test_thinking_blocks_are_stripped_before_scoring():
+    """A verdict explored inside <think> is not the verdict given to the user."""
+    response = (
+        "<think>Is this legal? The matching limit... actually it fails, so ILLEGAL."
+        "</think>**Verdict: ILLEGAL.** The salary does not match."
+    )
+    assert strip_thinking(response).startswith("**Verdict: ILLEGAL.**")
+
+    row = {
+        "kind": "trade_legality",
+        "verdict": "ILLEGAL",
+        "messages": [{"role": "system", "content": ""}, {"role": "user", "content": ""}],
+        "required_values": [],
+        "allowed_values": [],
+    }
+    assert score_response(row, response).verdict_correct is True
+
+
+def test_thinking_that_reaches_the_wrong_branch_does_not_leak_into_scoring():
+    """Thinking often says 'legal' before concluding illegal -- only the answer counts."""
+    response = (
+        "<think>This looks legal at first glance. Wait -- the aggregation ban applies, "
+        "so it is illegal.</think>**Verdict: LEGAL.** It fits cleanly."
+    )
+    row = {
+        "kind": "trade_legality",
+        "verdict": "LEGAL",
+        "messages": [{"role": "system", "content": ""}, {"role": "user", "content": ""}],
+        "required_values": [],
+        "allowed_values": [],
+    }
+    assert score_response(row, response).verdict_correct is True
+
+
+def test_unterminated_thinking_strips_to_nothing():
+    """Generation cut off mid-think leaves no user-facing answer; scoring must see that."""
+    assert strip_thinking("<think>working through the brackets and") == ""
 
 
 def test_reads_an_explicit_verdict_line():

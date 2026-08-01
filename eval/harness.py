@@ -32,6 +32,19 @@ from pathlib import Path
 
 from datagen.verify import dollar_figures
 
+# Reasoning models (Qwen3.6 among them) emit <think>...</think> before the answer. Scoring
+# must see only the answer: a verdict stated inside the thinking is not a verdict given to
+# the user, and thinking routinely explores the wrong branch before landing on the right
+# one. An unterminated block (generation cut off mid-think) leaves no answer at all -- that
+# strips to empty and fails scoring, which is the correct outcome, visible per-example.
+_THINK_BLOCK = re.compile(r"<think>.*?</think>\s*", re.DOTALL | re.IGNORECASE)
+_THINK_OPEN = re.compile(r"<think>.*\Z", re.DOTALL | re.IGNORECASE)
+
+
+def strip_thinking(text: str) -> str:
+    return _THINK_OPEN.sub("", _THINK_BLOCK.sub("", text)).strip()
+
+
 _LEGAL_WORDS = ("legal", "allowed", "permitted", "can do", "works", "yes")
 _ILLEGAL_WORDS = (
     "illegal", "not legal", "cannot", "can't", "not allowed", "not permitted",
@@ -85,6 +98,7 @@ def read_verdict(text: str) -> str | None:
 
 
 def score_response(row: dict, response: str) -> Score:
+    response = strip_thinking(response)
     expected = row.get("verdict")
     normalized = (
         {"ALLOWED": "LEGAL", "NOT ALLOWED": "ILLEGAL"}.get(expected, expected)
