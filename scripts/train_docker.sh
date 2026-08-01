@@ -16,6 +16,7 @@ shift || true
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 MODELS_DIR="${MODELS_DIR:-$HOME/hardcap-work/models}"
+IMAGE="${TRAIN_IMAGE:-hardcap-train:latest}"
 LOG="$REPO/logs/train-$PRESET-$(date +%Y%m%d-%H%M%S).log"
 mkdir -p "$REPO/logs" "$REPO/outputs"
 
@@ -28,5 +29,5 @@ docker run --rm --gpus all \
     -v "$REPO":/workspace -w /workspace \
     -v "$MODELS_DIR":/models -e HF_HOME=/models \
     --shm-size=16g \
-    unsloth/unsloth:dgxspark-latest \
+    "$IMAGE" \
     training/train_lora.py --preset "$PRESET" "$@" 2>&1 | tee "$LOG"
