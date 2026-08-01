@@ -20,9 +20,13 @@ LOG="$REPO/logs/train-$PRESET-$(date +%Y%m%d-%H%M%S).log"
 mkdir -p "$REPO/logs" "$REPO/outputs"
 
 echo "logging to $LOG"
+# --entrypoint python matters: the image's default entrypoint ignores the command and
+# boots a supervisord stack (Jupyter, sshd, Ollama) that idles forever. Discovered the
+# hard way -- a "training run" that was actually a Jupyter server for 90 minutes.
 docker run --rm --gpus all \
+    --entrypoint python \
     -v "$REPO":/workspace -w /workspace \
     -v "$MODELS_DIR":/models -e HF_HOME=/models \
     --shm-size=16g \
     unsloth/unsloth:dgxspark-latest \
-    python training/train_lora.py --preset "$PRESET" "$@" 2>&1 | tee "$LOG"
+    training/train_lora.py --preset "$PRESET" "$@" 2>&1 | tee "$LOG"
