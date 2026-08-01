@@ -125,9 +125,11 @@ def score_response(row: dict, response: str) -> Score:
 # -- model clients -------------------------------------------------------------------------
 
 
-def call_openai_compatible(base_url: str, model: str, system: str, user: str) -> str:
+def call_openai_compatible(
+    base_url: str, model: str, system: str, user: str, disable_thinking: bool = False
+) -> str:
     """Works with Ollama, vLLM, llama.cpp server -- anything speaking the chat API."""
-    payload = json.dumps({
+    body: dict = {
         "model": model,
         "messages": [
             {"role": "system", "content": system},
@@ -135,7 +137,13 @@ def call_openai_compatible(base_url: str, model: str, system: str, user: str) ->
         ],
         "temperature": 0,
         "max_tokens": 1600,
-    }).encode()
+    }
+    if disable_thinking:
+        # vLLM extension honored by Qwen-family chat templates. Baselines run with
+        # thinking off so base and fine-tune are compared on the same footing -- the
+        # training data contains no thinking blocks, so the fine-tune answers directly.
+        body["chat_template_kwargs"] = {"enable_thinking": False}
+    payload = json.dumps(body).encode()
 
     request = urllib.request.Request(
         f"{base_url.rstrip('/')}/chat/completions",
@@ -237,6 +245,10 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--out", type=Path, default=None, help="write per-example scores")
     parser.add_argument("--label", default=None)
+    parser.add_argument("--concurrency", type=int, default=8,
+                        help="parallel requests; vLLM batches these efficiently")
+    parser.add_argument("--disable-thinking", action="store_true",
+                        help="ask Qwen-style chat templates not to emit thinking blocks")
     args = parser.parse_args()
 
     if not args.model and not args.baseline:
@@ -252,27 +264,45 @@ def main() -> None:
         rows = rows[: args.limit]
 
     label = args.label or args.model or args.baseline
-    scores: list[Score] = []
 
-    for index, row in enumerate(rows, start=1):
+    # Sequential decode on a 27B dense model runs about a minute per answer; the box
+    # serves concurrent requests far more efficiently than serial ones, so fan out.
+    # Order is preserved by index; a persistent connection failure aborts the run rather
+    # than silently scoring a partial set.
+    from concurrent.futures import ThreadPoolExecutor
+
+    def answer(row: dict) -> Score:
         system = row["messages"][0]["content"]
         user = row["messages"][1]["content"]
-        try:
-            response = (
-                call_anthropic(args.baseline, system, user)
-                if args.baseline
-                else call_openai_compatible(args.base_url, args.model, system, user)
+        response = (
+            call_anthropic(args.baseline, system, user)
+            if args.baseline
+            else call_openai_compatible(
+                args.base_url, args.model, system, user,
+                disable_thinking=args.disable_thinking,
             )
-        except (urllib.error.URLError, TimeoutError) as exc:
-            sys.exit(
-                f"Could not reach {args.base_url}: {exc}\n"
-                "Is the model being served? Try: ollama serve"
-            )
-        scores.append(score_response(row, response))
+        )
+        return score_response(row, response)
 
-        if index % 20 == 0 or index == len(rows):
-            print(f"  scored {index}/{len(rows)}", file=sys.stderr, flush=True)
+    scores_by_index: dict[int, Score] = {}
+    done = 0
+    try:
+        with ThreadPoolExecutor(max_workers=max(1, args.concurrency)) as pool:
+            futures = {pool.submit(answer, row): i for i, row in enumerate(rows)}
+            from concurrent.futures import as_completed
 
+            for future in as_completed(futures):
+                scores_by_index[futures[future]] = future.result()
+                done += 1
+                if done % 20 == 0 or done == len(rows):
+                    print(f"  scored {done}/{len(rows)}", file=sys.stderr, flush=True)
+    except (urllib.error.URLError, TimeoutError) as exc:
+        sys.exit(
+            f"Could not reach {args.base_url}: {exc}\n"
+            "Is the model being served?"
+        )
+
+    scores = [scores_by_index[i] for i in range(len(rows))]
     print_report(scores, label)
 
     if args.out:
