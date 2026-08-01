@@ -69,6 +69,15 @@ def _verdict_line(rng: random.Random, legal: bool) -> str:
 # -- narrators ----------------------------------------------------------------------------
 
 
+def _matching_rule_phrase(rule: str) -> str:
+    """Drop the engine's parenthetical, which restates the tier we just named.
+
+    Without this a second-apron team reads "Sitting over the second apron ... under 100% of
+    outgoing salary (team is over the first apron)" -- both true, but jarring together.
+    """
+    return rule.split(" (")[0].strip()
+
+
 def _trade_legality(s: Scenario, rng: random.Random) -> str:
     f = s.answer_facts
     legal = f["legal"]
@@ -80,7 +89,7 @@ def _trade_legality(s: Scenario, rng: random.Random) -> str:
     )
     parts.append(
         f"Sitting {f['apron_level']}, our matching limit is "
-        f"{usd(f['max_incoming'])} under {f['matching_rule']}."
+        f"{usd(f['max_incoming'])} under {_matching_rule_phrase(f['matching_rule'])}."
     )
 
     if legal:
