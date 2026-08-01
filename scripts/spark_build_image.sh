@@ -10,10 +10,11 @@ set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 MODELS_DIR="${MODELS_DIR:-$HOME/hardcap-work/models}"
 
-# Upgrading transformers alone is a silent no-op: the installed unsloth pins it, so pip
-# resolves "latest satisfying the pin" -- the same version. The trio moves together, and
-# pip's output stays visible so a failed resolve can never masquerade as success again.
-UPGRADE="pip install -U unsloth unsloth_zoo transformers 2>&1 | tail -3"
+# Two traps found in sequence here: the container's Python is PEP-668 "externally
+# managed", so pip refuses to install anything without --break-system-packages (fine in
+# a disposable container); and the installed unsloth pins transformers, so the trio has
+# to move together. pip's output stays visible so a refusal can't masquerade as success.
+UPGRADE="pip install --break-system-packages -U unsloth unsloth_zoo transformers 2>&1 | tail -3"
 
 echo "=== probe: upgrade unsloth + transformers in a throwaway container ==="
 docker run --rm --entrypoint bash \
@@ -36,7 +37,7 @@ FROM unsloth/unsloth:dgxspark-latest
 # The base image predates the Qwen3.6 architecture, and its unsloth pins transformers so
 # neither can move alone. Upgrade the pure-Python trio together; torch / bitsandbytes /
 # CUDA stay exactly as NVIDIA built them for GB10.
-RUN pip install --no-cache-dir -U unsloth unsloth_zoo transformers
+RUN pip install --no-cache-dir --break-system-packages -U unsloth unsloth_zoo transformers
 EOF
 docker build -t hardcap-train:latest "$BUILD_DIR"
 echo
