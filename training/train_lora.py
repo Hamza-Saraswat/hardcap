@@ -91,19 +91,43 @@ PRESETS = {
         epochs=1,
         chat_template="harmony",
     ),
+    # Proves the loop on the exact model the main run uses -- 4-bit so it loads fast and
+    # peaks low. Meant to be invoked with --limit 200 --max-steps 40: not for quality, for
+    # finding container/template/OOM problems in 25 minutes instead of hour 4.
+    "smoke": Preset(
+        name="smoke",
+        model="unsloth/Qwen3.6-27B",
+        load_in_4bit=True,
+        max_seq_length=4096,
+        lora_r=16,
+        lora_alpha=32,
+        learning_rate=2e-4,
+        per_device_batch_size=1,
+        gradient_accumulation_steps=8,
+        epochs=1,
+    ),
 }
 
 
-def load_dataset(path: Path):
+def load_dataset(path: Path, limit: int | None = None):
     from datasets import Dataset
 
     rows = [json.loads(line) for line in path.open() if line.strip()]
     if not rows:
         raise SystemExit(f"No training rows in {path}")
+    if limit:
+        rows = rows[:limit]
     return Dataset.from_list([{"messages": r["messages"]} for r in rows])
 
 
-def train(preset: Preset, data_path: Path, output_dir: Path, resume: bool) -> None:
+def train(
+    preset: Preset,
+    data_path: Path,
+    output_dir: Path,
+    resume: bool,
+    limit: int | None = None,
+    max_steps: int | None = None,
+) -> None:
     # Imported here so --list-presets and --help work outside the training container.
     import torch
     from trl import SFTConfig, SFTTrainer
@@ -137,8 +161,11 @@ def train(preset: Preset, data_path: Path, output_dir: Path, resume: bool) -> No
 
         tokenizer = get_chat_template(tokenizer, chat_template=preset.chat_template)
 
-    dataset = load_dataset(data_path)
-    print(f"  {len(dataset)} training examples")
+    dataset = load_dataset(data_path, limit=limit)
+    print(f"  {len(dataset)} training examples"
+          + (" (limited from the full set)" if limit else ""))
+    if max_steps:
+        print(f"  capped at {max_steps} steps")
 
     effective_batch = preset.per_device_batch_size * preset.gradient_accumulation_steps
     trainer = SFTTrainer(
@@ -150,6 +177,7 @@ def train(preset: Preset, data_path: Path, output_dir: Path, resume: bool) -> No
             per_device_train_batch_size=preset.per_device_batch_size,
             gradient_accumulation_steps=preset.gradient_accumulation_steps,
             num_train_epochs=preset.epochs,
+            max_steps=max_steps or -1,
             learning_rate=preset.learning_rate,
             lr_scheduler_type="cosine",
             warmup_ratio=0.03,
@@ -181,11 +209,15 @@ def train(preset: Preset, data_path: Path, output_dir: Path, resume: bool) -> No
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--preset", default="prototype", choices=sorted(PRESETS))
+    parser.add_argument("--preset", default="main", choices=sorted(PRESETS))
     parser.add_argument("--data", type=Path, default=Path("data/dataset/train.jsonl"))
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--list-presets", action="store_true")
+    parser.add_argument("--limit", type=int, default=None,
+                        help="train on only the first N examples (smoke tests)")
+    parser.add_argument("--max-steps", type=int, default=None,
+                        help="stop after N optimizer steps regardless of epochs")
     args = parser.parse_args()
 
     if args.list_presets:
@@ -202,7 +234,8 @@ def main() -> None:
             "Generate it first:  python -m datagen.generate --count 10000 ...\n"
             "then                python -m datagen.build_dataset ..."
         )
-    train(preset, args.data, output, args.resume)
+    train(preset, args.data, output, args.resume, limit=args.limit,
+          max_steps=args.max_steps)
 
 
 if __name__ == "__main__":
