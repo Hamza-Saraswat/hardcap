@@ -17,7 +17,7 @@ MODELS_DIR="${MODELS_DIR:-$HOME/hardcap-work/models}"
 UPGRADE="pip install --break-system-packages -U unsloth unsloth_zoo transformers 2>&1 | tail -3"
 
 echo "=== probe: upgrade unsloth + transformers in a throwaway container ==="
-docker run --rm --entrypoint bash \
+docker run --rm --gpus all --entrypoint bash \
     -v "$MODELS_DIR":/models -e HF_HOME=/models \
     -v "$REPO/scripts":/probe \
     unsloth/unsloth:dgxspark-latest \

@@ -129,9 +129,12 @@ def train(
     max_steps: int | None = None,
 ) -> None:
     # Imported here so --list-presets and --help work outside the training container.
+    # Unsloth must come first: it patches transformers/trl at import time, and importing
+    # them before it silently drops the optimizations.
+    from unsloth import FastLanguageModel  # isort: skip
+
     import torch
     from trl import SFTConfig, SFTTrainer
-    from unsloth import FastLanguageModel
 
     print(f"Preset '{preset.name}': {preset.model}")
     print(f"  {'QLoRA (4-bit)' if preset.load_in_4bit else 'LoRA (BF16 base)'}, "
