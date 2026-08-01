@@ -109,7 +109,14 @@ PRESETS = {
 }
 
 
-def load_dataset(path: Path, limit: int | None = None):
+def load_dataset(path: Path, tokenizer, limit: int | None = None):
+    """Render each conversation through the model's chat template into plain text.
+
+    SFTTrainer's automatic handling of `messages` columns has shifted across TRL versions
+    (the current Unsloth patch demands a formatting_func outright), so we don't rely on
+    it: rendering the template ourselves produces the exact token stream the model will
+    see, stable across library upgrades.
+    """
     from datasets import Dataset
 
     rows = [json.loads(line) for line in path.open() if line.strip()]
@@ -117,7 +124,16 @@ def load_dataset(path: Path, limit: int | None = None):
         raise SystemExit(f"No training rows in {path}")
     if limit:
         rows = rows[:limit]
-    return Dataset.from_list([{"messages": r["messages"]} for r in rows])
+
+    texts = [
+        tokenizer.apply_chat_template(
+            row["messages"], tokenize=False, add_generation_prompt=False
+        )
+        for row in rows
+    ]
+    preview = texts[0][:300].replace("\n", "\\n")
+    print(f"  first rendered example (300 chars): {preview}")
+    return Dataset.from_list([{"text": t} for t in texts])
 
 
 def train(
@@ -169,7 +185,7 @@ def train(
 
         tokenizer = get_chat_template(tokenizer, chat_template=preset.chat_template)
 
-    dataset = load_dataset(data_path, limit=limit)
+    dataset = load_dataset(data_path, tokenizer, limit=limit)
     print(f"  {len(dataset)} training examples"
           + (" (limited from the full set)" if limit else ""))
     if max_steps:
@@ -198,6 +214,7 @@ def train(
             save_steps=50,
             save_total_limit=3,
             max_seq_length=preset.max_seq_length,
+            dataset_text_field="text",
             dataset_num_proc=2,
             report_to="none",
             seed=0,
