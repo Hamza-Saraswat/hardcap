@@ -54,6 +54,14 @@ tests/        117 tests, including golden cases against real transactions
 
 ## Getting started
 
+Every command below runs from the repository root — `uv run python -m datagen.…` resolves
+modules relative to the working directory, so it will fail with `No module named 'datagen'`
+anywhere else.
+
+```bash
+cd ~/Documents/Projects/Fine_tune
+```
+
 ```bash
 uv venv --python 3.12 && uv pip install -e ".[dev]"
 ```
