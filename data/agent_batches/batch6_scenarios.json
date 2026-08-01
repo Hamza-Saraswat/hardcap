@@ -1,0 +1,2171 @@
+[
+  {
+    "kind": "apron_status",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nMEMPHIS -- 2024-25 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nJalil Nakamura,5227653,0,4\nAndre Stavros,4001105,0,3\nMicah Marsh,26509655,0,2\nDarnell Marsh,5721453,1233334,3\nRashad Cordero,6918597,1233333,1\nTrey Whitfield,4701637,0,2\nJalil Osei,6260149,0,4\nBrennan Cordero,14846086,0,2\nMalik Stavros,2999690,0,1\nMarcus Marsh,47000093,0,3\nJaylen Duval,2211583,0,3\nKristaps Petrov,2183342,0,4\nKellen Halvorsen,16077269,0,3\nGoran Ibarra,6882641,1233333,4\nCorey Cordero,2947264,0,3\n\nRoster count: 15\n\nAre we over the second apron? How much room do we have?",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "tax_salary": 154488217,
+      "unlikely_incentives": 3700000,
+      "apron_salary": 158188217,
+      "apron_level": "under the tax line",
+      "room_to_first_apron": 19943783,
+      "room_to_second_apron": 30742783
+    },
+    "required_values": [
+      158188217
+    ],
+    "allowed_values": [
+      2024,
+      3700000,
+      5168000,
+      7983000,
+      12625783,
+      12822000,
+      19943783,
+      30742783,
+      140588000,
+      154488217,
+      158188217,
+      170814000,
+      178132000,
+      188931000,
+      218334204,
+      221158303,
+      294726403,
+      299969001,
+      400110503,
+      470163702,
+      522765304,
+      626014904,
+      1484608602,
+      1607726903,
+      2650965502,
+      4700009303,
+      572145312333343,
+      688264112333334,
+      691859712333331
+    ]
+  },
+  {
+    "kind": "trade_legality",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nNEW ORLEANS -- 2024-25 CAP SHEET\nDeni Sabonis             $5,589,404\nJaylen Dumont           $12,263,264\nZion Achiuwa             $7,353,432\nAmari Duval             $19,516,141\nDarnell Reddish         $48,936,259\nBrennan Nakamura         $4,028,659\nBrennan Amadi            $2,839,133\nJalil Vasquez            $4,621,310\nDeni Amadi               $2,394,206\nTerrance Boateng         $4,671,095\nAmari Cordero           $44,122,322\nAndre Brantley           $6,808,749\nBogdan Jokubaitis        $6,622,293\nNikola Rees              $7,121,981\n\nRoster count: 14\n\nWe're discussing a trade that sends Andre Brantley to another team for Elijah Ellington at $11,348,941. Is that legal for us, and what does it do to our cap situation?",
+    "verdict": "ILLEGAL",
+    "season": "2024-25",
+    "answer_facts": {
+      "legal": false,
+      "outgoing_salary": 6808749,
+      "incoming_salary": 11348941,
+      "max_incoming": 13867498,
+      "matching_rule": "200% + $250,000 (outgoing at or below $7,752,000)",
+      "apron_level": "over the tax line",
+      "apron_salary_after": 181428440,
+      "hard_cap_triggered": "first apron",
+      "violations": [
+        "New Orleans: hard cap exceeded -- New Orleans would sit at $181,428,440, above its first apron hard cap of $178,132,000 -- over by $3,296,440"
+      ]
+    },
+    "required_values": [
+      6808749,
+      11348941,
+      13867498
+    ],
+    "allowed_values": [
+      2024,
+      250000,
+      2394206,
+      2839133,
+      3296440,
+      4028659,
+      4621310,
+      4671095,
+      5168000,
+      5589404,
+      6622293,
+      6808749,
+      7121981,
+      7353432,
+      7752000,
+      7983000,
+      11348941,
+      12263264,
+      12822000,
+      13867498,
+      19516141,
+      44122322,
+      48936259,
+      140588000,
+      170814000,
+      176888248,
+      178132000,
+      181428440,
+      188931000
+    ]
+  },
+  {
+    "kind": "apron_status",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nSACRAMENTO -- 2024-25 CAP SHEET\nJalil Boateng           $3,216,486\nTobias Achiuwa         $39,425,205\nGoran Duval             $4,001,683\nBogdan Okoro            $4,296,611\nBogdan Novak           $42,268,522\nMarcus Kearns           $8,807,831\nGoran Cordero          $23,393,099\nMarcus Petrov          $13,623,492\nMicah Jokubaitis        $5,158,286   (+$1,100,000 unlikely)\nBrennan Amadi          $14,617,944   (+$1,100,000 unlikely)\nSanti Nakamura          $5,275,125\nTerrance Boateng        $6,158,626\nLuka Duval              $8,979,689   (+$1,100,000 unlikely)\n\nRoster count: 13\n\nGive me our apron position and what it means for the rest of the offseason.",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "tax_salary": 179222599,
+      "unlikely_incentives": 3300000,
+      "apron_salary": 182522599,
+      "apron_level": "over the first apron",
+      "room_to_first_apron": -4390599,
+      "room_to_second_apron": 6408401
+    },
+    "required_values": [
+      182522599
+    ],
+    "allowed_values": [
+      2024,
+      1100000,
+      3216486,
+      3300000,
+      4001683,
+      4296611,
+      4390599,
+      5158286,
+      5168000,
+      5275125,
+      6158626,
+      6408401,
+      7983000,
+      8807831,
+      8979689,
+      11708599,
+      12822000,
+      13623492,
+      14617944,
+      23393099,
+      39425205,
+      42268522,
+      140588000,
+      170814000,
+      178132000,
+      179222599,
+      182522599,
+      188931000
+    ]
+  },
+  {
+    "kind": "exception_survey",
+    "prompt": "2025-26 LEAGUE THRESHOLDS\n  Salary cap:          $154,647,000\n  Luxury tax line:     $187,895,000\n  First apron:         $195,945,000\n  Second apron:        $207,824,000\n  Non-taxpayer MLE:    $14,104,000\n  Taxpayer MLE:        $5,685,000\n  Room exception:      $8,781,000\n  Tax bracket width:   $5,685,000\n\nSACRAMENTO -- 2025-26 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nMalik Dumont,20576939,0,4\nMalik Kalinic,4846303,0,3\nJalil Okoro,8253920,0,3\nAndre Vasquez,8127239,0,1\nAndre Jokubaitis,19340647,0,2\nDeni Marsh,6559236,0,2\nDarnell Ferreira,45266856,0,3\nMarcus Duval,8133921,0,2\nSanti Beauchamp,6073960,0,4\nElijah Kalinic,7068873,0,4\nCorey Petrov,4508773,0,3\nGoran Ellington,8317416,0,2\nKristaps Osei,18704853,0,4\nKellen Marsh,40379492,0,2\n\nRoster count: 14\n\nRun me through our tools in free agency this summer.",
+    "verdict": null,
+    "season": "2025-26",
+    "answer_facts": {
+      "apron_level": "over the first apron",
+      "exceptions": [
+        {
+          "name": "non-taxpayer mid-level exception",
+          "available": false,
+          "amount": null,
+          "reason": "unavailable over the first apron",
+          "hard_cap": "first apron"
+        },
+        {
+          "name": "taxpayer mid-level exception",
+          "available": true,
+          "amount": 5685000,
+          "reason": "available at $5,685,000; using it hard-caps the team at the second apron",
+          "hard_cap": "second apron"
+        },
+        {
+          "name": "bi-annual exception",
+          "available": false,
+          "amount": null,
+          "reason": "unavailable over the first apron",
+          "hard_cap": "first apron"
+        },
+        {
+          "name": "room exception",
+          "available": false,
+          "amount": null,
+          "reason": "only available to a team operating under the cap",
+          "hard_cap": "none"
+        },
+        {
+          "name": "minimum salary exception",
+          "available": true,
+          "amount": null,
+          "reason": "always available at any apron level; triggers no hard cap",
+          "hard_cap": "none"
+        }
+      ]
+    },
+    "required_values": [],
+    "allowed_values": [
+      2025,
+      5685000,
+      8781000,
+      14104000,
+      154647000,
+      187895000,
+      195945000,
+      206158428,
+      207824000,
+      450877303,
+      484630303,
+      607396004,
+      655923602,
+      706887304,
+      812723901,
+      813392102,
+      825392003,
+      831741602,
+      1870485304,
+      1934064702,
+      2057693904,
+      4037949202,
+      4526685603
+    ]
+  },
+  {
+    "kind": "apron_status",
+    "prompt": "2026-27 LEAGUE THRESHOLDS\n  Salary cap:          $164,961,000\n  Luxury tax line:     $200,428,000\n  First apron:         $209,015,000\n  Second apron:        $221,686,000\n  Non-taxpayer MLE:    $15,044,000\n  Taxpayer MLE:        $6,064,000\n  Room exception:      $9,366,000\n  Tax bracket width:   $6,064,000\n  Bi-annual exception: $5,477,000\n\nWASHINGTON -- 2026-27 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nDevonte Halvorsen,33585251,0,1\nMalik Osei,32839571,0,2\nAmari Amadi,7024635,0,1\nMicah Vasquez,57736350,0,4\nKobe Brantley,5157656,400000,4\nDarnell Brantley,9077677,0,1\nSanti Brantley,4264097,0,4\nTrey Novak,7561990,0,3\nDeni Petrov,3493545,400000,3\nDarnell Duval,4432617,400000,2\nBogdan Ibarra,20356946,0,3\nAmari Whitfield,3947242,0,4\nDevonte Duval,14876073,0,2\nRashad Ferreira,4760397,0,3\n\nRoster count: 14\n\nWhere do we sit relative to the tax and the aprons right now?",
+    "verdict": null,
+    "season": "2026-27",
+    "answer_facts": {
+      "tax_salary": 209114047,
+      "unlikely_incentives": 1200000,
+      "apron_salary": 210314047,
+      "apron_level": "over the first apron",
+      "room_to_first_apron": -1299047,
+      "room_to_second_apron": 11371953
+    },
+    "required_values": [
+      210314047
+    ],
+    "allowed_values": [
+      2026,
+      1200000,
+      1299047,
+      5477000,
+      6064000,
+      9366000,
+      9886047,
+      11371953,
+      15044000,
+      164961000,
+      200428000,
+      209015000,
+      209114047,
+      210314047,
+      221686000,
+      394724204,
+      426409704,
+      476039703,
+      702463501,
+      756199003,
+      907767701,
+      1487607302,
+      2035694603,
+      3283957102,
+      3358525101,
+      5773635004,
+      34935454000003,
+      44326174000002,
+      51576564000004
+    ]
+  },
+  {
+    "kind": "anti_staleness",
+    "prompt": "2028-29 LEAGUE THRESHOLDS\n  Salary cap:          $154,333,000\n  Luxury tax line:     $187,514,000\n  First apron:         $195,547,000\n  Second apron:        $207,402,000\n  Non-taxpayer MLE:    $14,076,000\n  Taxpayer MLE:        $5,673,000\n  Room exception:      $8,763,000\n  Tax bracket width:   $5,673,000\n  Bi-annual exception: $5,489,000\n\nBROOKLYN -- 2028-29 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Deni Reddish | $46,948,995 | -- | 4 |\n| Marcus Kalinic | $16,312,755 | -- | 1 |\n| Terrance Vasquez | $15,567,299 | -- | 1 |\n| Kellen Ellington | $8,395,172 | -- | 1 |\n| Corey Halvorsen | $7,163,226 | -- | 4 |\n| Darnell Sabonis | $51,600,089 | -- | 3 |\n| Dante Reddish | $8,068,376 | -- | 4 |\n| Kellen Reddish | $8,309,046 | -- | 2 |\n| Brennan Osei | $3,504,747 | -- | 3 |\n| Elijah Dumont | $9,117,989 | -- | 3 |\n| Corey Achiuwa | $3,872,635 | -- | 4 |\n| Malik Brantley | $8,904,669 | -- | 4 |\n| Darnell Marsh | $6,322,434 | -- | 2 |\n\nRoster count: 13\n\nUsing the 2028-29 thresholds above, where does this payroll put us, and which restrictions apply?",
+    "verdict": null,
+    "season": "2028-29",
+    "answer_facts": {
+      "season": "2028-29",
+      "apron_salary": 194087432,
+      "apron_level": "over the tax line",
+      "first_apron_provided": 195547000,
+      "second_apron_provided": 207402000,
+      "would_be_wrong_using_published_figures": "over the second apron",
+      "note": "The thresholds in the prompt are the only valid source. Answering from any memorized season's figures gives the wrong tier here."
+    },
+    "required_values": [
+      194087432,
+      207402000
+    ],
+    "allowed_values": [
+      2028,
+      3504747,
+      3872635,
+      5489000,
+      5673000,
+      6322434,
+      7163226,
+      8068376,
+      8309046,
+      8395172,
+      8763000,
+      8904669,
+      9117989,
+      13314568,
+      14076000,
+      15567299,
+      16312755,
+      46948995,
+      51600089,
+      154333000,
+      187514000,
+      194087432,
+      195547000,
+      207402000
+    ]
+  },
+  {
+    "kind": "anti_staleness",
+    "prompt": "2027-28 LEAGUE THRESHOLDS\n  Salary cap:          $148,296,000\n  Luxury tax line:     $180,180,000\n  First apron:         $187,899,000\n  Second apron:        $199,290,000\n  Non-taxpayer MLE:    $13,525,000\n  Taxpayer MLE:        $5,451,000\n  Room exception:      $8,421,000\n  Tax bracket width:   $5,451,000\n  Bi-annual exception: $5,274,000\n\nDETROIT -- 2027-28 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nTrey Stavros,15496620,0,3\nKellen Kearns,9040615,0,4\nCam Okoro,7888126,0,3\nGoran Okoro,9420779,0,2\nAndre Kearns,31704837,0,1\nTobias Ferreira,2343256,0,3\nCam Reddish,8308269,0,4\nRashad Kalinic,6654623,0,4\nMarcus Marsh,5702208,0,2\nKellen Rees,6725702,0,3\nJulian Stavros,49243572,0,2\nDarnell Beauchamp,3398650,0,4\nMalik Cordero,18707650,0,1\nDarnell Jokubaitis,20068922,0,1\n\nRoster count: 14\n\nUsing the 2027-28 thresholds above, where does this payroll put us, and which restrictions apply?",
+    "verdict": null,
+    "season": "2027-28",
+    "answer_facts": {
+      "season": "2027-28",
+      "apron_salary": 194703829,
+      "apron_level": "over the first apron",
+      "first_apron_provided": 187899000,
+      "second_apron_provided": 199290000,
+      "would_be_wrong_using_published_figures": "over the second apron",
+      "note": "The thresholds in the prompt are the only valid source. Answering from any memorized season's figures gives the wrong tier here."
+    },
+    "required_values": [
+      194703829,
+      199290000
+    ],
+    "allowed_values": [
+      2027,
+      4586171,
+      5274000,
+      5451000,
+      8421000,
+      13525000,
+      148296000,
+      180180000,
+      187899000,
+      194703829,
+      199290000,
+      234325603,
+      339865004,
+      570220802,
+      665462304,
+      672570203,
+      788812603,
+      830826904,
+      904061504,
+      942077902,
+      1549662003,
+      1870765001,
+      2006892201,
+      3170483701,
+      4924357202
+    ]
+  },
+  {
+    "kind": "apron_status",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nATLANTA -- 2024-25 CAP SHEET\nGoran Duval              $8,696,323\nBogdan Lindqvist         $8,721,221\nCam Jokubaitis           $3,300,555\nBogdan Boateng          $10,308,883\nAndre Rees               $6,698,507\nDeni Reddish            $13,858,910\nDarnell Nakamura        $43,858,638\nKellen Lindqvist         $2,684,604\nMicah Halvorsen          $6,830,346\nGoran Reddish           $13,310,531\nCam Rees                $41,857,976\nDante Kearns             $7,560,122\nRashad Jokubaitis        $9,122,127\nDarnell Duval            $6,628,767\n\nRoster count: 14\n\nGive me our apron position and what it means for the rest of the offseason.",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "tax_salary": 183437510,
+      "unlikely_incentives": 0,
+      "apron_salary": 183437510,
+      "apron_level": "over the first apron",
+      "room_to_first_apron": -5305510,
+      "room_to_second_apron": 5493490
+    },
+    "required_values": [
+      183437510
+    ],
+    "allowed_values": [
+      2024,
+      2684604,
+      3300555,
+      5168000,
+      5305510,
+      5493490,
+      6628767,
+      6698507,
+      6830346,
+      7560122,
+      7983000,
+      8696323,
+      8721221,
+      9122127,
+      10308883,
+      12623510,
+      12822000,
+      13310531,
+      13858910,
+      41857976,
+      43858638,
+      140588000,
+      170814000,
+      178132000,
+      183437510,
+      188931000
+    ]
+  },
+  {
+    "kind": "apron_status",
+    "prompt": "2026-27 LEAGUE THRESHOLDS\n  Salary cap:          $164,961,000\n  Luxury tax line:     $200,428,000\n  First apron:         $209,015,000\n  Second apron:        $221,686,000\n  Non-taxpayer MLE:    $15,044,000\n  Taxpayer MLE:        $6,064,000\n  Room exception:      $9,366,000\n  Tax bracket width:   $6,064,000\n  Bi-annual exception: $5,477,000\n\nCHICAGO -- 2026-27 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Nikola Nakamura | $6,713,673 | -- | 2 |\n| Brennan Ibarra | $7,963,304 | -- | 2 |\n| Zion Okoro | $6,279,546 | -- | 2 |\n| Kristaps Dumont | $27,728,245 | -- | 2 |\n| Dante Amadi | $6,644,912 | -- | 4 |\n| Rashad Stavros | $3,939,010 | -- | 3 |\n| Cam Vasquez | $43,787,519 | -- | 1 |\n| Deni Jokubaitis | $4,773,569 | -- | 1 |\n| Julian Kalinic | $7,703,780 | -- | 2 |\n| Elijah Ibarra | $5,418,992 | -- | 4 |\n| Dante Reddish | $13,065,911 | -- | 1 |\n| Santi Osei | $50,194,615 | -- | 4 |\n| Kristaps Nakamura | $4,148,276 | -- | 1 |\n| Kristaps Duval | $15,454,272 | -- | 4 |\n\nRoster count: 14\n\nWhere do we sit relative to the tax and the aprons right now?",
+    "verdict": null,
+    "season": "2026-27",
+    "answer_facts": {
+      "tax_salary": 203815624,
+      "unlikely_incentives": 0,
+      "apron_salary": 203815624,
+      "apron_level": "over the tax line",
+      "room_to_first_apron": 5199376,
+      "room_to_second_apron": 17870376
+    },
+    "required_values": [
+      203815624
+    ],
+    "allowed_values": [
+      2026,
+      3387624,
+      3939010,
+      4148276,
+      4773569,
+      5199376,
+      5418992,
+      5477000,
+      6064000,
+      6279546,
+      6644912,
+      6713673,
+      7703780,
+      7963304,
+      9366000,
+      13065911,
+      15044000,
+      15454272,
+      17870376,
+      27728245,
+      43787519,
+      50194615,
+      164961000,
+      200428000,
+      203815624,
+      209015000,
+      221686000
+    ]
+  },
+  {
+    "kind": "buyout_market",
+    "prompt": "2025-26 LEAGUE THRESHOLDS\n  Salary cap:          $154,647,000\n  Luxury tax line:     $187,895,000\n  First apron:         $195,945,000\n  Second apron:        $207,824,000\n  Non-taxpayer MLE:    $14,104,000\n  Taxpayer MLE:        $5,685,000\n  Room exception:      $8,781,000\n  Tax bracket width:   $5,685,000\n\nORLANDO -- 2025-26 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Deni Vasquez | $6,359,009 | -- | 1 |\n| Luka Sabonis | $33,653,055 | -- | 1 |\n| Rashad Halvorsen | $54,126,450 | -- | 3 |\n| Bogdan Amadi | $11,405,211 | -- | 2 |\n| Zion Okoro | $5,735,132 | -- | 3 |\n| Kristaps Sabonis | $24,341,307 | -- | 4 |\n| Darnell Amadi | $3,903,944 | -- | 4 |\n| Elijah Osei | $9,964,931 | -- | 3 |\n| Julian Beauchamp | $10,431,741 | -- | 3 |\n| Cam Dumont | $9,325,963 | -- | 3 |\n| Kellen Nakamura | $7,097,676 | -- | 3 |\n| Jalil Reddish | $8,581,279 | -- | 3 |\n| Nikola Lindqvist | $8,254,626 | -- | 2 |\n\nRoster count: 13\n\nSanti Cordero is about to be bought out -- he was making $38,900,000 before the waiver. Can we sign him?",
+    "verdict": "ALLOWED",
+    "season": "2025-26",
+    "answer_facts": {
+      "allowed": true,
+      "pre_waiver_salary": 38900000,
+      "non_taxpayer_mle": 14104000,
+      "apron_level": "over the tax line",
+      "reason": "Orlando is not over the first apron, so the buyout restriction does not apply"
+    },
+    "required_values": [
+      38900000,
+      14104000
+    ],
+    "allowed_values": [
+      2025,
+      3903944,
+      5685000,
+      5735132,
+      6359009,
+      7097676,
+      8254626,
+      8581279,
+      8781000,
+      9325963,
+      9964931,
+      10431741,
+      11405211,
+      14104000,
+      24341307,
+      33653055,
+      38900000,
+      54126450,
+      154647000,
+      187895000,
+      193180324,
+      195945000,
+      207824000
+    ]
+  },
+  {
+    "kind": "tax_bill",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nCHARLOTTE -- 2024-25 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nDeni Reddish,13536195,0,2\nGoran Ellington,8614960,0,4\nDante Sabonis,26084109,0,2\nRashad Kalinic,6537427,0,3\nBogdan Ferreira,10830500,0,3\nLuka Marsh,49205800,0,4\nTobias Novak,10607727,0,1\nKellen Rees,6846490,0,1\nMicah Halvorsen,8100218,0,2\nMarcus Jokubaitis,8778830,0,4\nJalil Nakamura,12859551,0,3\nElijah Marsh,30276820,0,4\nBrennan Kalinic,8463577,0,1\n\nRoster count: 13\n\nHow much tax are we paying at this payroll?",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "tax_salary": 200742204,
+      "tax_line": 170814000,
+      "amount_over": 29928204,
+      "is_repeater": false,
+      "total": 83266867,
+      "brackets": [
+        {
+          "index": 1,
+          "amount": 5168000,
+          "rate": 1.5,
+          "owed": 7752000
+        },
+        {
+          "index": 2,
+          "amount": 5168000,
+          "rate": 1.75,
+          "owed": 9044000
+        },
+        {
+          "index": 3,
+          "amount": 5168000,
+          "rate": 2.5,
+          "owed": 12920000
+        },
+        {
+          "index": 4,
+          "amount": 5168000,
+          "rate": 3.25,
+          "owed": 16796000
+        },
+        {
+          "index": 5,
+          "amount": 5168000,
+          "rate": 3.75,
+          "owed": 19380000
+        },
+        {
+          "index": 6,
+          "amount": 4088204,
+          "rate": 4.25,
+          "owed": 17374867
+        }
+      ]
+    },
+    "required_values": [
+      83266867,
+      29928204
+    ],
+    "allowed_values": [
+      2024,
+      4088204,
+      5168000,
+      7752000,
+      7983000,
+      9044000,
+      12822000,
+      12920000,
+      16796000,
+      17374867,
+      19380000,
+      29928204,
+      83266867,
+      140588000,
+      170814000,
+      178132000,
+      188931000,
+      200742204,
+      653742703,
+      684649001,
+      810021802,
+      846357701,
+      861496004,
+      877883004,
+      1060772701,
+      1083050003,
+      1285955103,
+      1353619502,
+      2608410902,
+      3027682004,
+      4920580004
+    ]
+  },
+  {
+    "kind": "anti_staleness",
+    "prompt": "2027-28 LEAGUE THRESHOLDS\n  Salary cap:          $149,634,000\n  Luxury tax line:     $181,804,000\n  First apron:         $189,593,000\n  Second apron:        $201,087,000\n  Non-taxpayer MLE:    $13,647,000\n  Taxpayer MLE:        $5,501,000\n  Room exception:      $8,497,000\n  Tax bracket width:   $5,501,000\n  Bi-annual exception: $5,322,000\n\nORLANDO -- 2027-28 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Santi Halvorsen | $2,925,694 | -- | 2 |\n| Malik Sabonis | $8,155,906 | -- | 3 |\n| Kellen Beauchamp | $27,646,697 | -- | 4 |\n| Julian Amadi | $45,179,413 | -- | 4 |\n| Micah Duval | $5,143,269 | -- | 4 |\n| Isaiah Osei | $5,638,614 | -- | 2 |\n| Brennan Nakamura | $4,062,238 | -- | 1 |\n| Cam Ibarra | $3,952,503 | -- | 1 |\n| Corey Beauchamp | $2,222,000 | -- | 1 |\n| Deni Kearns | $3,990,452 | -- | 3 |\n| Nikola Lindqvist | $20,887,536 | -- | 3 |\n| Kristaps Novak | $6,903,609 | -- | 3 |\n| Goran Marsh | $8,175,401 | -- | 3 |\n| Kellen Dumont | $10,773,358 | -- | 1 |\n| Corey Ferreira | $44,548,503 | -- | 4 |\n\nRoster count: 15\n\nUsing the 2027-28 thresholds above, where does this payroll put us, and which restrictions apply?",
+    "verdict": null,
+    "season": "2027-28",
+    "answer_facts": {
+      "season": "2027-28",
+      "apron_salary": 200205193,
+      "apron_level": "over the first apron",
+      "first_apron_provided": 189593000,
+      "second_apron_provided": 201087000,
+      "would_be_wrong_using_published_figures": "over the second apron",
+      "note": "The thresholds in the prompt are the only valid source. Answering from any memorized season's figures gives the wrong tier here."
+    },
+    "required_values": [
+      200205193,
+      201087000
+    ],
+    "allowed_values": [
+      2027,
+      881807,
+      2222000,
+      2925694,
+      3952503,
+      3990452,
+      4062238,
+      5143269,
+      5322000,
+      5501000,
+      5638614,
+      6903609,
+      8155906,
+      8175401,
+      8497000,
+      10773358,
+      13647000,
+      20887536,
+      27646697,
+      44548503,
+      45179413,
+      149634000,
+      181804000,
+      189593000,
+      200205193,
+      201087000
+    ]
+  },
+  {
+    "kind": "apron_status",
+    "prompt": "2026-27 LEAGUE THRESHOLDS\n  Salary cap:          $164,961,000\n  Luxury tax line:     $200,428,000\n  First apron:         $209,015,000\n  Second apron:        $221,686,000\n  Non-taxpayer MLE:    $15,044,000\n  Taxpayer MLE:        $6,064,000\n  Room exception:      $9,366,000\n  Tax bracket width:   $6,064,000\n  Bi-annual exception: $5,477,000\n\nSACRAMENTO -- 2026-27 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Kristaps Jokubaitis | $10,038,639 | -- | 1 |\n| Brennan Lindqvist | $9,251,778 | -- | 4 |\n| Isaiah Whitfield | $7,267,210 | -- | 3 |\n| Amari Duval | $18,362,574 | -- | 1 |\n| Marcus Petrov | $6,375,667 | -- | 3 |\n| Jalil Brantley | $10,080,077 | -- | 1 |\n| Darnell Rees | $15,404,591 | -- | 2 |\n| Deni Amadi | $13,980,317 | -- | 3 |\n| Cam Marsh | $33,472,098 | -- | 4 |\n| Alperen Marsh | $14,548,323 | -- | 2 |\n| Andre Okoro | $57,736,350 | -- | 1 |\n| Isaiah Amadi | $11,239,072 | -- | 4 |\n| Brennan Osei | $15,370,534 | -- | 4 |\n\nRoster count: 13\n\nGive me our apron position and what it means for the rest of the offseason.",
+    "verdict": null,
+    "season": "2026-27",
+    "answer_facts": {
+      "tax_salary": 223127230,
+      "unlikely_incentives": 0,
+      "apron_salary": 223127230,
+      "apron_level": "over the second apron",
+      "room_to_first_apron": -14112230,
+      "room_to_second_apron": -1441230
+    },
+    "required_values": [
+      223127230
+    ],
+    "allowed_values": [
+      2026,
+      1441230,
+      5477000,
+      6064000,
+      6375667,
+      7267210,
+      9251778,
+      9366000,
+      10038639,
+      10080077,
+      11239072,
+      13980317,
+      14112230,
+      14548323,
+      15044000,
+      15370534,
+      15404591,
+      18362574,
+      22699230,
+      33472098,
+      57736350,
+      164961000,
+      200428000,
+      209015000,
+      221686000,
+      223127230
+    ]
+  },
+  {
+    "kind": "scenario_planning",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nCHARLOTTE -- 2024-25 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Nikola Okoro | $38,692,667 | -- | 4 |\n| Cam Okoro | $23,964,106 | -- | 1 |\n| Zion Dumont | $3,101,125 | -- | 3 |\n| Trey Ibarra | $16,786,781 | -- | 3 |\n| Malik Whitfield | $5,365,916 | -- | 3 |\n| Kristaps Beauchamp | $3,850,321 | -- | 1 |\n| Brennan Brantley | $2,966,283 | -- | 2 |\n| Cam Petrov | $6,711,636 | -- | 1 |\n| Nikola Brantley | $3,265,726 | -- | 4 |\n| Santi Dumont | $7,473,348 | -- | 2 |\n| Goran Ferreira | $3,549,138 | -- | 2 |\n| Dante Vasquez | $22,575,215 | -- | 2 |\n| Andre Dumont | $7,166,225 | -- | 2 |\n| Kellen Whitfield | $47,314,789 | -- | 1 |\n| Luka Vasquez | $8,001,687 | -- | 2 |\n\nRoster count: 15\n\nOwnership wants us out of the second apron. Walk me through how we do it.",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "apron_salary": 200784963,
+      "second_apron": 188931000,
+      "overage": 11853963,
+      "aggregation_banned": true,
+      "cash_banned": true,
+      "single_salary_solutions": [
+        {
+          "player": "Trey Ibarra",
+          "salary": 16786781,
+          "surplus": 4932818
+        },
+        {
+          "player": "Dante Vasquez",
+          "salary": 22575215,
+          "surplus": 10721252
+        },
+        {
+          "player": "Cam Okoro",
+          "salary": 23964106,
+          "surplus": 12110143
+        },
+        {
+          "player": "Nikola Okoro",
+          "salary": 38692667,
+          "surplus": 26838704
+        }
+      ]
+    },
+    "required_values": [
+      11853963
+    ],
+    "allowed_values": [
+      2024,
+      2966283,
+      3101125,
+      3265726,
+      3549138,
+      3850321,
+      4932818,
+      5168000,
+      5365916,
+      6711636,
+      7166225,
+      7473348,
+      7983000,
+      8001687,
+      10721252,
+      11853963,
+      12110143,
+      12822000,
+      16786781,
+      22575215,
+      23964106,
+      26838704,
+      38692667,
+      47314789,
+      140588000,
+      170814000,
+      178132000,
+      188931000,
+      200784963
+    ]
+  },
+  {
+    "kind": "draft_penalty",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nSACRAMENTO -- 2024-25 CAP SHEET\nAndre Ellington          $4,749,702\nBrennan Okoro           $28,283,213\nAlperen Reddish          $4,554,465\nMarcus Novak            $12,643,034\nMalik Achiuwa           $49,205,800\nMicah Whitfield         $12,465,575\nKobe Vasquez             $4,245,213\nCam Stavros              $5,443,526\nCam Nakamura            $11,775,685\nMicah Cordero           $12,243,835\nAmari Halvorsen          $5,345,223\nBrennan Halvorsen       $36,847,535\nCorey Kalinic           $10,992,424\n\nRoster count: 13\n\nIf we finish the season at this payroll, what happens to our draft picks?",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "pick_frozen": true,
+      "frozen_draft_year": 2031,
+      "pick_demoted": false,
+      "seasons_over": 0,
+      "reason": "Sacramento finishes over the second apron, freezing its 2031 first-round pick. It unfreezes only after finishing below the second apron in 3 of the following 4 seasons"
+    },
+    "required_values": [],
+    "allowed_values": [
+      2024,
+      2031,
+      4245213,
+      4554465,
+      4749702,
+      5168000,
+      5345223,
+      5443526,
+      7983000,
+      10992424,
+      11775685,
+      12243835,
+      12465575,
+      12643034,
+      12822000,
+      28283213,
+      36847535,
+      49205800,
+      140588000,
+      170814000,
+      178132000,
+      188931000,
+      198795230
+    ]
+  },
+  {
+    "kind": "exception_survey",
+    "prompt": "2025-26 LEAGUE THRESHOLDS\n  Salary cap:          $154,647,000\n  Luxury tax line:     $187,895,000\n  First apron:         $195,945,000\n  Second apron:        $207,824,000\n  Non-taxpayer MLE:    $14,104,000\n  Taxpayer MLE:        $5,685,000\n  Room exception:      $8,781,000\n  Tax bracket width:   $5,685,000\n\nSAN ANTONIO -- 2025-26 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Amari Novak | $7,859,309 | -- | 3 |\n| Nico Reddish | $18,164,819 | -- | 2 |\n| Rashad Ibarra | $7,164,049 | -- | 1 |\n| Rashad Rees | $7,815,492 | -- | 4 |\n| Micah Lindqvist | $7,244,299 | -- | 2 |\n| Kellen Stavros | $17,439,541 | -- | 3 |\n| Luka Stavros | $18,694,019 | -- | 3 |\n| Dante Whitfield | $7,519,890 | -- | 2 |\n| Goran Marsh | $18,208,969 | -- | 3 |\n| Brennan Petrov | $10,906,333 | -- | 2 |\n| Darnell Jokubaitis | $18,895,920 | -- | 2 |\n| Tobias Vasquez | $6,492,471 | -- | 1 |\n| Corey Ellington | $54,126,450 | -- | 2 |\n| Micah Achiuwa | $14,152,824 | -- | 3 |\n| Nikola Brantley | $16,352,659 | -- | 2 |\n\nRoster count: 15\n\nRun me through our tools in free agency this summer.",
+    "verdict": null,
+    "season": "2025-26",
+    "answer_facts": {
+      "apron_level": "over the second apron",
+      "exceptions": [
+        {
+          "name": "non-taxpayer mid-level exception",
+          "available": false,
+          "amount": null,
+          "reason": "unavailable over the first apron",
+          "hard_cap": "first apron"
+        },
+        {
+          "name": "taxpayer mid-level exception",
+          "available": false,
+          "amount": null,
+          "reason": "unavailable over the second apron -- no mid-level of any kind",
+          "hard_cap": "second apron"
+        },
+        {
+          "name": "bi-annual exception",
+          "available": false,
+          "amount": null,
+          "reason": "unavailable over the first apron",
+          "hard_cap": "first apron"
+        },
+        {
+          "name": "room exception",
+          "available": false,
+          "amount": null,
+          "reason": "only available to a team operating under the cap",
+          "hard_cap": "none"
+        },
+        {
+          "name": "minimum salary exception",
+          "available": true,
+          "amount": null,
+          "reason": "always available at any apron level; triggers no hard cap",
+          "hard_cap": "none"
+        }
+      ]
+    },
+    "required_values": [],
+    "allowed_values": [
+      2025,
+      5685000,
+      6492471,
+      7164049,
+      7244299,
+      7519890,
+      7815492,
+      7859309,
+      8781000,
+      10906333,
+      14104000,
+      14152824,
+      16352659,
+      17439541,
+      18164819,
+      18208969,
+      18694019,
+      18895920,
+      54126450,
+      154647000,
+      187895000,
+      195945000,
+      207824000,
+      231037044
+    ]
+  },
+  {
+    "kind": "trade_legality",
+    "prompt": "2026-27 LEAGUE THRESHOLDS\n  Salary cap:          $164,961,000\n  Luxury tax line:     $200,428,000\n  First apron:         $209,015,000\n  Second apron:        $221,686,000\n  Non-taxpayer MLE:    $15,044,000\n  Taxpayer MLE:        $6,064,000\n  Room exception:      $9,366,000\n  Tax bracket width:   $6,064,000\n  Bi-annual exception: $5,477,000\n\nPORTLAND -- 2026-27 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Nikola Beauchamp | $8,108,986 | -- | 3 |\n| Nico Nakamura | $26,040,502 | -- | 2 |\n| Brennan Achiuwa | $5,463,597 | -- | 4 |\n| Jalil Kearns | $9,690,310 | -- | 2 |\n| Santi Stavros | $10,007,402 | -- | 1 |\n| Dante Vasquez | $3,465,870 | -- | 2 |\n| Andre Amadi | $34,329,196 | -- | 2 |\n| Malik Kearns | $7,377,408 | -- | 3 |\n| Corey Stavros | $20,797,048 | -- | 2 |\n| Jalil Stavros | $4,883,230 | -- | 2 |\n| Amari Brantley | $3,865,597 | -- | 3 |\n| Devonte Jokubaitis | $57,736,350 | -- | 1 |\n| Jalil Vasquez | $6,056,311 | -- | 4 |\n| Julian Sabonis | $5,128,688 | -- | 1 |\n| Zion Dumont | $9,817,599 | -- | 2 |\n\nRoster count: 15\n\nWe're discussing a trade that sends Julian Sabonis to another team for Andre Vasquez at $4,507,546. Is that legal for us, and what does it do to our cap situation?",
+    "verdict": "LEGAL",
+    "season": "2026-27",
+    "answer_facts": {
+      "legal": true,
+      "outgoing_salary": 5128688,
+      "incoming_salary": 4507546,
+      "max_incoming": 5128688,
+      "matching_rule": "100% of outgoing salary (team is over the first apron)",
+      "apron_level": "over the first apron",
+      "apron_salary_after": 212146952,
+      "hard_cap_triggered": "none",
+      "violations": []
+    },
+    "required_values": [
+      5128688,
+      4507546,
+      5128688
+    ],
+    "allowed_values": [
+      2026,
+      3465870,
+      3865597,
+      4507546,
+      4883230,
+      5128688,
+      5463597,
+      5477000,
+      6056311,
+      6064000,
+      7377408,
+      8108986,
+      9366000,
+      9690310,
+      9817599,
+      10007402,
+      15044000,
+      20797048,
+      26040502,
+      34329196,
+      57736350,
+      164961000,
+      200428000,
+      209015000,
+      212146952,
+      212768094,
+      221686000
+    ]
+  },
+  {
+    "kind": "anti_staleness",
+    "prompt": "2027-28 LEAGUE THRESHOLDS\n  Salary cap:          $150,375,000\n  Luxury tax line:     $182,705,000\n  First apron:         $190,532,000\n  Second apron:        $202,083,000\n  Non-taxpayer MLE:    $13,715,000\n  Taxpayer MLE:        $5,528,000\n  Room exception:      $8,539,000\n  Tax bracket width:   $5,528,000\n  Bi-annual exception: $5,348,000\n\nSACRAMENTO -- 2027-28 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Nico Jokubaitis | $5,059,121 | -- | 2 |\n| Kristaps Lindqvist | $6,583,976 | -- | 3 |\n| Corey Beauchamp | $6,023,041 | -- | 3 |\n| Alperen Ellington | $5,467,043 | -- | 4 |\n| Kobe Kearns | $42,966,332 | -- | 4 |\n| Nico Boateng | $14,031,890 | -- | 3 |\n| Deni Novak | $6,954,293 | -- | 1 |\n| Malik Nakamura | $11,226,632 | -- | 4 |\n| Kristaps Cordero | $20,731,421 | -- | 3 |\n| Alperen Cordero | $3,396,455 | -- | 1 |\n| Zion Vasquez | $6,218,242 | -- | 3 |\n| Amari Petrov | $37,869,471 | -- | 4 |\n| Darnell Jokubaitis | $7,008,743 | -- | 1 |\n| Amari Achiuwa | $5,823,328 | -- | 3 |\n| Nico Amadi | $6,415,661 | -- | 2 |\n\nRoster count: 15\n\nUsing the 2027-28 thresholds above, where does this payroll put us, and which restrictions apply?",
+    "verdict": null,
+    "season": "2027-28",
+    "answer_facts": {
+      "season": "2027-28",
+      "apron_salary": 185775649,
+      "apron_level": "over the tax line",
+      "first_apron_provided": 190532000,
+      "second_apron_provided": 202083000,
+      "would_be_wrong_using_published_figures": "over the first apron",
+      "note": "The thresholds in the prompt are the only valid source. Answering from any memorized season's figures gives the wrong tier here."
+    },
+    "required_values": [
+      185775649,
+      202083000
+    ],
+    "allowed_values": [
+      2027,
+      3396455,
+      5059121,
+      5348000,
+      5467043,
+      5528000,
+      5823328,
+      6023041,
+      6218242,
+      6415661,
+      6583976,
+      6954293,
+      7008743,
+      8539000,
+      11226632,
+      13715000,
+      14031890,
+      16307351,
+      20731421,
+      37869471,
+      42966332,
+      150375000,
+      182705000,
+      185775649,
+      190532000,
+      202083000
+    ]
+  },
+  {
+    "kind": "anti_staleness",
+    "prompt": "2027-28 LEAGUE THRESHOLDS\n  Salary cap:          $176,706,000\n  Luxury tax line:     $214,698,000\n  First apron:         $223,896,000\n  Second apron:        $237,469,000\n  Non-taxpayer MLE:    $16,115,000\n  Taxpayer MLE:        $6,496,000\n  Room exception:      $10,033,000\n  Tax bracket width:   $6,496,000\n  Bi-annual exception: $5,867,000\n\nTORONTO -- 2027-28 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nTerrance Halvorsen,10361509,0,1\nKristaps Cordero,12986837,0,2\nDante Okoro,25792718,0,1\nAmari Ellington,61847099,0,3\nDarnell Whitfield,8960593,0,2\nLuka Beauchamp,7569115,0,3\nJaylen Amadi,15436579,0,3\nDevonte Jokubaitis,7608401,0,4\nMalik Ellington,22416081,0,3\nGoran Whitfield,6268994,0,3\nMarcus Nakamura,7332679,0,4\nMicah Stavros,14243982,0,1\nSanti Ibarra,9180552,0,2\nAndre Nakamura,8628684,0,2\nDante Ellington,13364192,0,1\n\nRoster count: 15\n\nUsing the 2027-28 thresholds above, where does this payroll put us, and which restrictions apply?",
+    "verdict": null,
+    "season": "2027-28",
+    "answer_facts": {
+      "season": "2027-28",
+      "apron_salary": 231998015,
+      "apron_level": "over the first apron",
+      "first_apron_provided": 223896000,
+      "second_apron_provided": 237469000,
+      "would_be_wrong_using_published_figures": "over the second apron",
+      "note": "The thresholds in the prompt are the only valid source. Answering from any memorized season's figures gives the wrong tier here."
+    },
+    "required_values": [
+      231998015,
+      237469000
+    ],
+    "allowed_values": [
+      2027,
+      5470985,
+      5867000,
+      6496000,
+      10033000,
+      16115000,
+      176706000,
+      214698000,
+      223896000,
+      231998015,
+      237469000,
+      626899403,
+      733267904,
+      756911503,
+      760840104,
+      862868402,
+      896059302,
+      918055202,
+      1036150901,
+      1298683702,
+      1336419201,
+      1424398201,
+      1543657903,
+      2241608103,
+      2579271801,
+      6184709903
+    ]
+  },
+  {
+    "kind": "hard_cap_consequence",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nWASHINGTON -- 2024-25 CAP SHEET\nJaylen Brantley         $5,808,682\nKellen Vasquez          $8,246,954\nGoran Marsh            $24,882,134\nAmari Whitfield        $44,478,530\nJulian Reddish          $2,560,952\nBogdan Ellington        $3,888,729\nBrennan Osei            $2,221,921\nRashad Petrov           $8,553,743\nTobias Ibarra           $2,580,477\nNico Okoro              $7,414,010\nTrey Vasquez           $19,706,823\nMarcus Nakamura         $4,152,208\nZion Ferreira           $7,599,106\nGoran Nakamura         $38,320,883\nMicah Whitfield         $2,537,893\n\nRoster count: 15\nHard cap: second apron\n\nWe're hard-capped at the second apron. Can we add Corey Boateng at $7,807,428?",
+    "verdict": "ILLEGAL",
+    "season": "2024-25",
+    "answer_facts": {
+      "legal": false,
+      "hard_cap": "second apron",
+      "hard_cap_limit": 188931000,
+      "room_below_hard_cap": 5977955,
+      "salary": 7807428,
+      "apron_salary_after": 190760473,
+      "reasons": [
+        "the signing would put Washington at $190,760,473, above its second apron hard cap of $188,931,000",
+        "Washington already carries 15 players"
+      ]
+    },
+    "required_values": [
+      7807428,
+      188931000
+    ],
+    "allowed_values": [
+      2024,
+      1829473,
+      2221921,
+      2537893,
+      2560952,
+      2580477,
+      3888729,
+      4152208,
+      5168000,
+      5808682,
+      5977955,
+      7414010,
+      7599106,
+      7807428,
+      7983000,
+      8246954,
+      8553743,
+      12822000,
+      19706823,
+      24882134,
+      38320883,
+      44478530,
+      140588000,
+      170814000,
+      178132000,
+      182953045,
+      188931000,
+      190760473
+    ]
+  },
+  {
+    "kind": "apron_status",
+    "prompt": "2025-26 LEAGUE THRESHOLDS\n  Salary cap:          $154,647,000\n  Luxury tax line:     $187,895,000\n  First apron:         $195,945,000\n  Second apron:        $207,824,000\n  Non-taxpayer MLE:    $14,104,000\n  Taxpayer MLE:        $5,685,000\n  Room exception:      $8,781,000\n  Tax bracket width:   $5,685,000\n\nSAN ANTONIO -- 2025-26 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Andre Petrov | $22,404,128 | -- | 3 |\n| Brennan Osei | $6,385,923 | -- | 4 |\n| Elijah Petrov | $5,257,733 | -- | 1 |\n| Jaylen Vasquez | $2,423,611 | -- | 4 |\n| Trey Beauchamp | $39,264,362 | -- | 2 |\n| Bogdan Jokubaitis | $7,770,520 | -- | 2 |\n| Deni Rees | $5,790,294 | -- | 2 |\n| Nikola Lindqvist | $7,407,118 | -- | 2 |\n| Micah Halvorsen | $23,169,438 | $900,000 | 1 |\n| Rashad Rees | $5,289,356 | -- | 2 |\n| Luka Ellington | $6,980,149 | -- | 2 |\n| Jaylen Jokubaitis | $4,809,833 | $900,000 | 2 |\n| Devonte Halvorsen | $44,048,084 | -- | 4 |\n| Amari Halvorsen | $4,525,760 | -- | 4 |\n| Goran Okoro | $5,344,909 | $900,000 | 3 |\n\nRoster count: 15\n\nWhere do we sit relative to the tax and the aprons right now?",
+    "verdict": null,
+    "season": "2025-26",
+    "answer_facts": {
+      "tax_salary": 190871218,
+      "unlikely_incentives": 2700000,
+      "apron_salary": 193571218,
+      "apron_level": "over the tax line",
+      "room_to_first_apron": 2373782,
+      "room_to_second_apron": 14252782
+    },
+    "required_values": [
+      193571218
+    ],
+    "allowed_values": [
+      2025,
+      900000,
+      2373782,
+      2423611,
+      2700000,
+      4525760,
+      4809833,
+      5257733,
+      5289356,
+      5344909,
+      5676218,
+      5685000,
+      5790294,
+      6385923,
+      6980149,
+      7407118,
+      7770520,
+      8781000,
+      14104000,
+      14252782,
+      22404128,
+      23169438,
+      39264362,
+      44048084,
+      154647000,
+      187895000,
+      190871218,
+      193571218,
+      195945000,
+      207824000
+    ]
+  },
+  {
+    "kind": "stretch_provision",
+    "prompt": "2025-26 LEAGUE THRESHOLDS\n  Salary cap:          $154,647,000\n  Luxury tax line:     $187,895,000\n  First apron:         $195,945,000\n  Second apron:        $207,824,000\n  Non-taxpayer MLE:    $14,104,000\n  Taxpayer MLE:        $5,685,000\n  Room exception:      $8,781,000\n  Tax bracket width:   $5,685,000\n\nIf we waive and stretch Deni Achiuwa -- $95,700,000 left over 3 years -- what does the dead money look like, and is it even allowed?",
+    "verdict": "ILLEGAL",
+    "season": "2025-26",
+    "answer_facts": {
+      "legal": false,
+      "remaining_salary": 95700000,
+      "years_remaining": 3,
+      "stretch_years": 7,
+      "annual_dead_money": 13671429,
+      "existing_stretched": 15500000,
+      "limit": 23197050,
+      "givebacks_required": 41820653,
+      "reason": "the stretch is not legal as structured: $29,171,429 of dead money would exceed the $23,197,050 ceiling by $5,974,379 per season. The player would have to give back roughly $41,820,653 for the waiver to work"
+    },
+    "required_values": [
+      13671429,
+      23197050
+    ],
+    "allowed_values": [
+      2025,
+      5685000,
+      5974379,
+      8781000,
+      13671429,
+      14104000,
+      15500000,
+      23197050,
+      29171429,
+      41820653,
+      95700000,
+      154647000,
+      187895000,
+      195945000,
+      207824000
+    ]
+  },
+  {
+    "kind": "trade_legality",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nMIAMI -- 2024-25 CAP SHEET\nDeni Halvorsen           $5,902,142\nZion Kearns             $22,882,819\nBogdan Lindqvist         $6,598,706\nNico Nakamura            $3,781,581\nDante Novak              $4,717,175\nAmari Cordero           $20,468,066\nAmari Whitfield          $8,957,100\nCorey Duval              $6,046,332\nTerrance Rees           $47,648,001\nBogdan Petrov            $4,499,684\nKobe Dumont              $5,421,920\nJalil Kearns            $10,554,315\nMarcus Rees             $20,730,430\nJaylen Jokubaitis        $9,849,188\nNikola Whitfield         $9,352,683\n\nRoster count: 15\n\nWe're discussing a trade that sends Bogdan Petrov and Zion Kearns to another team for Isaiah Lindqvist at $20,336,503. Is that legal for us, and what does it do to our cap situation?",
+    "verdict": "LEGAL",
+    "season": "2024-25",
+    "answer_facts": {
+      "legal": true,
+      "outgoing_salary": 27382503,
+      "incoming_salary": 20336503,
+      "max_incoming": 27382503,
+      "matching_rule": "100% of outgoing salary (team is over the first apron)",
+      "apron_level": "over the first apron",
+      "apron_salary_after": 180364142,
+      "hard_cap_triggered": "second apron",
+      "violations": []
+    },
+    "required_values": [
+      27382503,
+      20336503,
+      27382503
+    ],
+    "allowed_values": [
+      2024,
+      3781581,
+      4499684,
+      4717175,
+      5168000,
+      5421920,
+      5902142,
+      6046332,
+      6598706,
+      7983000,
+      8566858,
+      8957100,
+      9352683,
+      9849188,
+      10554315,
+      12822000,
+      20336503,
+      20468066,
+      20730430,
+      22882819,
+      27382503,
+      47648001,
+      140588000,
+      170814000,
+      178132000,
+      180364142,
+      187410142,
+      188931000
+    ]
+  },
+  {
+    "kind": "tax_bill",
+    "prompt": "2025-26 LEAGUE THRESHOLDS\n  Salary cap:          $154,647,000\n  Luxury tax line:     $187,895,000\n  First apron:         $195,945,000\n  Second apron:        $207,824,000\n  Non-taxpayer MLE:    $14,104,000\n  Taxpayer MLE:        $5,685,000\n  Room exception:      $8,781,000\n  Tax bracket width:   $5,685,000\n\nSACRAMENTO -- 2025-26 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nCorey Dumont,11938836,0,2\nJulian Duval,8245647,0,4\nTobias Reddish,8161940,0,1\nDeni Reddish,12382748,0,1\nNico Rees,9527939,0,4\nJulian Halvorsen,6988374,0,3\nKristaps Cordero,9825914,0,1\nTerrance Sabonis,9358477,0,2\nRashad Ellington,9873100,0,1\nJalil Ellington,5365629,0,2\nMarcus Whitfield,23025115,0,2\nBrennan Marsh,54126450,0,4\nGoran Osei,7941280,0,4\nMalik Novak,32082725,0,2\nCam Sabonis,10212765,0,4\n\nRoster count: 15\n\nHow much tax are we paying at this payroll?",
+    "verdict": null,
+    "season": "2025-26",
+    "answer_facts": {
+      "tax_salary": 219056939,
+      "tax_line": 187895000,
+      "amount_over": 31161939,
+      "is_repeater": false,
+      "total": 105276149,
+      "brackets": [
+        {
+          "index": 1,
+          "amount": 5685000,
+          "rate": 1.0,
+          "owed": 5685000
+        },
+        {
+          "index": 2,
+          "amount": 5685000,
+          "rate": 1.25,
+          "owed": 7106250
+        },
+        {
+          "index": 3,
+          "amount": 5685000,
+          "rate": 3.5,
+          "owed": 19897500
+        },
+        {
+          "index": 4,
+          "amount": 5685000,
+          "rate": 4.75,
+          "owed": 27003750
+        },
+        {
+          "index": 5,
+          "amount": 5685000,
+          "rate": 5.25,
+          "owed": 29846250
+        },
+        {
+          "index": 6,
+          "amount": 2736939,
+          "rate": 5.75,
+          "owed": 15737399
+        }
+      ]
+    },
+    "required_values": [
+      105276149,
+      31161939
+    ],
+    "allowed_values": [
+      2025,
+      2736939,
+      5685000,
+      7106250,
+      8781000,
+      14104000,
+      15737399,
+      19897500,
+      27003750,
+      29846250,
+      31161939,
+      105276149,
+      154647000,
+      187895000,
+      195945000,
+      207824000,
+      219056939,
+      536562902,
+      698837403,
+      794128004,
+      816194001,
+      824564704,
+      935847702,
+      952793904,
+      982591401,
+      987310001,
+      1021276504,
+      1193883602,
+      1238274801,
+      2302511502,
+      3208272502,
+      5412645004
+    ]
+  },
+  {
+    "kind": "trade_legality",
+    "prompt": "2026-27 LEAGUE THRESHOLDS\n  Salary cap:          $164,961,000\n  Luxury tax line:     $200,428,000\n  First apron:         $209,015,000\n  Second apron:        $221,686,000\n  Non-taxpayer MLE:    $15,044,000\n  Taxpayer MLE:        $6,064,000\n  Room exception:      $9,366,000\n  Tax bracket width:   $6,064,000\n  Bi-annual exception: $5,477,000\n\nSACRAMENTO -- 2026-27 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nDante Nakamura,5497616,0,2\nCorey Kalinic,26913415,0,2\nBogdan Beauchamp,5932316,0,1\nBogdan Osei,4242648,0,1\nElijah Halvorsen,6402867,0,2\nNikola Dumont,10015084,0,4\nCam Reddish,7291469,0,2\nSanti Jokubaitis,7687535,0,2\nSanti Vasquez,55658370,0,3\nLuka Cordero,3095293,0,2\nDante Cordero,6933760,0,3\nBrennan Dumont,4934193,0,3\nZion Kalinic,4791976,0,2\nAndre Dumont,13419991,0,3\n\nRoster count: 14\n\nWe're discussing a trade that sends Cam Reddish to another team for Nikola Cordero at $13,925,019. Is that legal for us, and what does it do to our cap situation?",
+    "verdict": "LEGAL",
+    "season": "2026-27",
+    "answer_facts": {
+      "legal": true,
+      "outgoing_salary": 7291469,
+      "incoming_salary": 13925019,
+      "max_incoming": 14832938,
+      "matching_rule": "200% + $250,000 (outgoing at or below $9,096,000)",
+      "apron_level": "under the tax line",
+      "apron_salary_after": 169450083,
+      "hard_cap_triggered": "first apron",
+      "violations": []
+    },
+    "required_values": [
+      7291469,
+      13925019,
+      14832938
+    ],
+    "allowed_values": [
+      2026,
+      250000,
+      5477000,
+      6064000,
+      7291469,
+      9096000,
+      9366000,
+      13925019,
+      14832938,
+      15044000,
+      39564917,
+      162816533,
+      164961000,
+      169450083,
+      200428000,
+      209015000,
+      221686000,
+      309529302,
+      424264801,
+      479197602,
+      493419303,
+      549761602,
+      593231601,
+      640286702,
+      693376003,
+      729146902,
+      768753502,
+      1001508404,
+      1341999103,
+      2691341502,
+      5565837003
+    ]
+  },
+  {
+    "kind": "hard_cap_consequence",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nHOUSTON -- 2024-25 CAP SHEET\nTrey Nakamura            $49,205,800\nNico Duval                $8,271,431\nTerrance Lindqvist        $8,858,717\nAlperen Nakamura          $9,731,289\nNikola Dumont             $7,091,065\nJulian Ibarra             $2,668,226\nAndre Whitfield          $17,098,195\nKristaps Kearns           $9,841,978\nRashad Boateng            $7,559,291\nJulian Achiuwa            $7,700,853\nNico Whitfield           $31,965,849\nTrey Brantley             $4,731,101\nRashad Dumont             $8,123,594\n\nRoster count: 13\nHard cap: first apron\n\nWe're hard-capped at the first apron. Can we add Kellen Marsh at $3,658,267?",
+    "verdict": "LEGAL",
+    "season": "2024-25",
+    "answer_facts": {
+      "legal": true,
+      "hard_cap": "first apron",
+      "hard_cap_limit": 178132000,
+      "room_below_hard_cap": 5284611,
+      "salary": 3658267,
+      "apron_salary_after": 176505656,
+      "reasons": []
+    },
+    "required_values": [
+      3658267,
+      178132000
+    ],
+    "allowed_values": [
+      2024,
+      1626344,
+      2668226,
+      3658267,
+      4731101,
+      5168000,
+      5284611,
+      7091065,
+      7559291,
+      7700853,
+      7983000,
+      8123594,
+      8271431,
+      8858717,
+      9731289,
+      9841978,
+      12822000,
+      17098195,
+      31965849,
+      49205800,
+      140588000,
+      170814000,
+      172847389,
+      176505656,
+      178132000,
+      188931000
+    ]
+  },
+  {
+    "kind": "buyout_market",
+    "prompt": "2025-26 LEAGUE THRESHOLDS\n  Salary cap:          $154,647,000\n  Luxury tax line:     $187,895,000\n  First apron:         $195,945,000\n  Second apron:        $207,824,000\n  Non-taxpayer MLE:    $14,104,000\n  Taxpayer MLE:        $5,685,000\n  Room exception:      $8,781,000\n  Tax bracket width:   $5,685,000\n\nSAN ANTONIO -- 2025-26 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nDarnell Osei,5705366,0,2\nKellen Vasquez,6329764,0,1\nZion Marsh,5428180,0,4\nDevonte Duval,5892861,0,1\nAmari Ellington,20622544,0,4\nBogdan Novak,39821490,0,2\nSanti Cordero,2580284,0,4\nDeni Ferreira,14986313,0,2\nNikola Whitfield,5053263,0,2\nKobe Petrov,3265781,0,3\nMicah Rees,22426191,0,3\nJalil Vasquez,6139400,0,2\nMarcus Beauchamp,4804945,0,4\nAndre Ferreira,9012711,0,4\nKobe Lindqvist,40502224,0,1\n\nRoster count: 15\n\nJulian Kearns is about to be bought out -- he was making $33,900,000 before the waiver. Can we sign him?",
+    "verdict": "ALLOWED",
+    "season": "2025-26",
+    "answer_facts": {
+      "allowed": true,
+      "pre_waiver_salary": 33900000,
+      "non_taxpayer_mle": 14104000,
+      "apron_level": "over the tax line",
+      "reason": "San Antonio is not over the first apron, so the buyout restriction does not apply"
+    },
+    "required_values": [
+      33900000,
+      14104000
+    ],
+    "allowed_values": [
+      2025,
+      5685000,
+      8781000,
+      14104000,
+      33900000,
+      154647000,
+      187895000,
+      192571317,
+      195945000,
+      207824000,
+      258028404,
+      326578103,
+      480494504,
+      505326302,
+      542818004,
+      570536602,
+      589286101,
+      613940002,
+      632976401,
+      901271104,
+      1498631302,
+      2062254404,
+      2242619103,
+      3982149002,
+      4050222401
+    ]
+  },
+  {
+    "kind": "exception_eligibility",
+    "prompt": "2025-26 LEAGUE THRESHOLDS\n  Salary cap:          $154,647,000\n  Luxury tax line:     $187,895,000\n  First apron:         $195,945,000\n  Second apron:        $207,824,000\n  Non-taxpayer MLE:    $14,104,000\n  Taxpayer MLE:        $5,685,000\n  Room exception:      $8,781,000\n  Tax bracket width:   $5,685,000\n\nMIAMI -- 2025-26 CAP SHEET\nBogdan Beauchamp       $17,103,567\nMarcus Cordero          $3,284,571\nMarcus Vasquez          $3,526,605\nBogdan Novak            $5,499,829\nDevonte Kearns         $26,215,863\nNico Nakamura          $20,637,838\nZion Novak              $7,992,199\nCorey Achiuwa           $8,185,603\nAlperen Duval           $4,813,582\nKristaps Dumont        $46,722,262\nKobe Amadi              $7,294,480\nAndre Cordero           $3,789,787\nZion Whitfield         $18,811,809\n\nRoster count: 13\n\nCan we sign Elijah Jokubaitis for $7,088,972 using the taxpayer mid-level exception? If it works, tell me what it costs us in flexibility.",
+    "verdict": "ILLEGAL",
+    "season": "2025-26",
+    "answer_facts": {
+      "legal": false,
+      "exception": "taxpayer mid-level exception",
+      "salary": 7088972,
+      "hard_cap_triggered": "none",
+      "apron_level": "under the tax line",
+      "apron_salary_after": 180966967,
+      "reasons": [
+        "$7,088,972 exceeds the taxpayer mid-level exception of $5,685,000 by $1,403,972"
+      ]
+    },
+    "required_values": [
+      7088972
+    ],
+    "allowed_values": [
+      2025,
+      1403972,
+      3284571,
+      3526605,
+      3789787,
+      4813582,
+      5499829,
+      5685000,
+      7088972,
+      7294480,
+      7992199,
+      8185603,
+      8781000,
+      14104000,
+      17103567,
+      18811809,
+      20637838,
+      26215863,
+      26857033,
+      46722262,
+      154647000,
+      173877995,
+      180966967,
+      187895000,
+      195945000,
+      207824000
+    ]
+  },
+  {
+    "kind": "anti_staleness",
+    "prompt": "2027-28 LEAGUE THRESHOLDS\n  Salary cap:          $178,982,000\n  Luxury tax line:     $217,464,000\n  First apron:         $226,780,000\n  Second apron:        $240,528,000\n  Non-taxpayer MLE:    $16,323,000\n  Taxpayer MLE:        $6,579,000\n  Room exception:      $10,162,000\n  Tax bracket width:   $6,579,000\n  Bi-annual exception: $5,943,000\n\nINDIANA -- 2027-28 CAP SHEET\nTerrance Halvorsen       $20,500,455\nAndre Whitfield           $2,882,631\nMalik Jokubaitis         $17,025,064\nJaylen Achiuwa           $49,399,716\nTobias Okoro             $51,513,722\nBrennan Marsh             $5,008,881\nJalil Reddish             $6,885,746\nDante Novak              $20,481,664\nDante Boateng             $3,773,481\nAmari Reddish            $27,975,958\nMarcus Sabonis            $4,829,841\nDarnell Kearns            $3,968,357\nBogdan Osei               $7,208,881\n\nRoster count: 13\n\nUsing the 2027-28 thresholds above, where does this payroll put us, and which restrictions apply?",
+    "verdict": null,
+    "season": "2027-28",
+    "answer_facts": {
+      "season": "2027-28",
+      "apron_salary": 221454397,
+      "apron_level": "over the tax line",
+      "first_apron_provided": 226780000,
+      "second_apron_provided": 240528000,
+      "would_be_wrong_using_published_figures": "over the first apron",
+      "note": "The thresholds in the prompt are the only valid source. Answering from any memorized season's figures gives the wrong tier here."
+    },
+    "required_values": [
+      221454397,
+      240528000
+    ],
+    "allowed_values": [
+      2027,
+      2882631,
+      3773481,
+      3968357,
+      4829841,
+      5008881,
+      5943000,
+      6579000,
+      6885746,
+      7208881,
+      10162000,
+      16323000,
+      17025064,
+      19073603,
+      20481664,
+      20500455,
+      27975958,
+      49399716,
+      51513722,
+      178982000,
+      217464000,
+      221454397,
+      226780000,
+      240528000
+    ]
+  },
+  {
+    "kind": "apron_status",
+    "prompt": "2025-26 LEAGUE THRESHOLDS\n  Salary cap:          $154,647,000\n  Luxury tax line:     $187,895,000\n  First apron:         $195,945,000\n  Second apron:        $207,824,000\n  Non-taxpayer MLE:    $14,104,000\n  Taxpayer MLE:        $5,685,000\n  Room exception:      $8,781,000\n  Tax bracket width:   $5,685,000\n\nATLANTA -- 2025-26 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nAlperen Ibarra,46688624,0,2\nZion Achiuwa,25924318,0,2\nElijah Boateng,30057194,0,3\nKellen Petrov,14708609,0,2\nAndre Halvorsen,29833646,0,4\nElijah Sabonis,6385074,666666,1\nKristaps Ferreira,5149629,0,4\nTobias Beauchamp,6864708,0,1\nDevonte Petrov,7200677,0,2\nAmari Ellington,8467817,0,3\nAmari Petrov,7143015,666666,3\nRashad Amadi,3744107,0,4\nMarcus Achiuwa,4801969,666668,4\n\nRoster count: 13\n\nWhere do we sit relative to the tax and the aprons right now?",
+    "verdict": null,
+    "season": "2025-26",
+    "answer_facts": {
+      "tax_salary": 196969387,
+      "unlikely_incentives": 2000000,
+      "apron_salary": 198969387,
+      "apron_level": "over the first apron",
+      "room_to_first_apron": -3024387,
+      "room_to_second_apron": 8854613
+    },
+    "required_values": [
+      198969387
+    ],
+    "allowed_values": [
+      2025,
+      2000000,
+      3024387,
+      5685000,
+      8781000,
+      8854613,
+      11074387,
+      14104000,
+      154647000,
+      187895000,
+      195945000,
+      196969387,
+      198969387,
+      207824000,
+      374410704,
+      514962904,
+      686470801,
+      720067702,
+      846781703,
+      1470860902,
+      2592431802,
+      2983364604,
+      3005719403,
+      4668862402,
+      48019696666684,
+      63850746666661,
+      71430156666663
+    ]
+  },
+  {
+    "kind": "anti_staleness",
+    "prompt": "2028-29 LEAGUE THRESHOLDS\n  Salary cap:          $174,000,000\n  Luxury tax line:     $211,410,000\n  First apron:         $220,468,000\n  Second apron:        $233,833,000\n  Non-taxpayer MLE:    $15,868,000\n  Taxpayer MLE:        $6,396,000\n  Room exception:      $9,879,000\n  Tax bracket width:   $6,396,000\n  Bi-annual exception: $5,777,000\n\nORLANDO -- 2028-29 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Dante Reddish | $10,887,256 | -- | 4 |\n| Tobias Okoro | $8,323,468 | -- | 1 |\n| Zion Stavros | $34,793,759 | -- | 1 |\n| Darnell Petrov | $60,899,999 | -- | 4 |\n| Jalil Brantley | $30,769,223 | -- | 3 |\n| Kristaps Rees | $6,067,808 | -- | 4 |\n| Cam Novak | $8,286,337 | -- | 3 |\n| Marcus Boateng | $5,544,065 | -- | 1 |\n| Deni Nakamura | $14,799,736 | -- | 3 |\n| Luka Osei | $21,386,453 | -- | 4 |\n| Elijah Stavros | $3,954,082 | -- | 3 |\n| Jalil Whitfield | $6,469,002 | -- | 2 |\n| Jaylen Lindqvist | $5,786,352 | -- | 4 |\n| Rashad Novak | $4,086,249 | -- | 3 |\n| Malik Rees | $11,058,737 | -- | 1 |\n\nRoster count: 15\n\nUsing the 2028-29 thresholds above, where does this payroll put us, and which restrictions apply?",
+    "verdict": null,
+    "season": "2028-29",
+    "answer_facts": {
+      "season": "2028-29",
+      "apron_salary": 233112526,
+      "apron_level": "over the first apron",
+      "first_apron_provided": 220468000,
+      "second_apron_provided": 233833000,
+      "would_be_wrong_using_published_figures": "over the second apron",
+      "note": "The thresholds in the prompt are the only valid source. Answering from any memorized season's figures gives the wrong tier here."
+    },
+    "required_values": [
+      233112526,
+      233833000
+    ],
+    "allowed_values": [
+      2028,
+      720474,
+      3954082,
+      4086249,
+      5544065,
+      5777000,
+      5786352,
+      6067808,
+      6396000,
+      6469002,
+      8286337,
+      8323468,
+      9879000,
+      10887256,
+      11058737,
+      14799736,
+      15868000,
+      21386453,
+      30769223,
+      34793759,
+      60899999,
+      174000000,
+      211410000,
+      220468000,
+      233112526,
+      233833000
+    ]
+  },
+  {
+    "kind": "tax_bill",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nCHARLOTTE -- 2024-25 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Jalil Reddish | $4,364,873 | -- | 2 |\n| Elijah Nakamura | $5,744,122 | -- | 4 |\n| Corey Rees | $5,637,481 | -- | 3 |\n| Terrance Ellington | $2,403,155 | -- | 1 |\n| Elijah Lindqvist | $41,425,777 | -- | 3 |\n| Alperen Halvorsen | $6,080,366 | -- | 2 |\n| Trey Dumont | $7,850,240 | -- | 2 |\n| Marcus Nakamura | $15,257,537 | -- | 3 |\n| Corey Sabonis | $38,931,556 | -- | 4 |\n| Andre Ibarra | $7,144,090 | -- | 1 |\n| Kobe Stavros | $13,734,247 | -- | 1 |\n| Brennan Jokubaitis | $8,121,044 | -- | 2 |\n| Zion Sabonis | $20,752,447 | -- | 4 |\n| Jaylen Reddish | $3,492,559 | -- | 4 |\n| Darnell Cordero | $3,712,339 | -- | 4 |\n\nRoster count: 15\nRepeater taxpayer: yes\n\nWhat's our luxury tax bill this season? Walk me through the brackets.",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "tax_salary": 184651833,
+      "tax_line": 170814000,
+      "amount_over": 13837833,
+      "is_repeater": true,
+      "total": 39388416,
+      "brackets": [
+        {
+          "index": 1,
+          "amount": 5168000,
+          "rate": 2.5,
+          "owed": 12920000
+        },
+        {
+          "index": 2,
+          "amount": 5168000,
+          "rate": 2.75,
+          "owed": 14212000
+        },
+        {
+          "index": 3,
+          "amount": 3501833,
+          "rate": 3.5,
+          "owed": 12256416
+        }
+      ]
+    },
+    "required_values": [
+      39388416,
+      13837833
+    ],
+    "allowed_values": [
+      2024,
+      2403155,
+      3492559,
+      3501833,
+      3712339,
+      4364873,
+      5168000,
+      5637481,
+      5744122,
+      6080366,
+      7144090,
+      7850240,
+      7983000,
+      8121044,
+      12256416,
+      12822000,
+      12920000,
+      13734247,
+      13837833,
+      14212000,
+      15257537,
+      20752447,
+      38931556,
+      39388416,
+      41425777,
+      140588000,
+      170814000,
+      178132000,
+      184651833,
+      188931000
+    ]
+  },
+  {
+    "kind": "scenario_planning",
+    "prompt": "2025-26 LEAGUE THRESHOLDS\n  Salary cap:          $154,647,000\n  Luxury tax line:     $187,895,000\n  First apron:         $195,945,000\n  Second apron:        $207,824,000\n  Non-taxpayer MLE:    $14,104,000\n  Taxpayer MLE:        $5,685,000\n  Room exception:      $8,781,000\n  Tax bracket width:   $5,685,000\n\nBROOKLYN -- 2025-26 CAP SHEET\nTrey Novak              $4,432,225\nBogdan Novak           $37,476,671\nAndre Brantley         $47,509,742\nGoran Brantley          $6,065,569\nTrey Kalinic            $2,296,000\nCorey Osei              $4,686,115\nAndre Ferreira         $27,126,974\nIsaiah Rees             $6,730,142\nAlperen Nakamura        $2,524,371\nAndre Stavros           $6,779,953\nAndre Lindqvist        $14,012,730\nKellen Boateng          $4,203,378\nJaylen Petrov           $6,250,239\nAlperen Vasquez        $25,118,979\nAmari Nakamura         $20,956,546\n\nRoster count: 15\n\nOwnership wants us out of the second apron. Walk me through how we do it.",
+    "verdict": null,
+    "season": "2025-26",
+    "answer_facts": {
+      "apron_salary": 216169634,
+      "second_apron": 207824000,
+      "overage": 8345634,
+      "aggregation_banned": true,
+      "cash_banned": true,
+      "single_salary_solutions": [
+        {
+          "player": "Andre Lindqvist",
+          "salary": 14012730,
+          "surplus": 5667096
+        },
+        {
+          "player": "Amari Nakamura",
+          "salary": 20956546,
+          "surplus": 12610912
+        },
+        {
+          "player": "Alperen Vasquez",
+          "salary": 25118979,
+          "surplus": 16773345
+        },
+        {
+          "player": "Andre Ferreira",
+          "salary": 27126974,
+          "surplus": 18781340
+        }
+      ]
+    },
+    "required_values": [
+      8345634
+    ],
+    "allowed_values": [
+      2025,
+      2296000,
+      2524371,
+      4203378,
+      4432225,
+      4686115,
+      5667096,
+      5685000,
+      6065569,
+      6250239,
+      6730142,
+      6779953,
+      8345634,
+      8781000,
+      12610912,
+      14012730,
+      14104000,
+      16773345,
+      18781340,
+      20956546,
+      25118979,
+      27126974,
+      37476671,
+      47509742,
+      154647000,
+      187895000,
+      195945000,
+      207824000,
+      216169634
+    ]
+  },
+  {
+    "kind": "hard_cap_consequence",
+    "prompt": "2026-27 LEAGUE THRESHOLDS\n  Salary cap:          $164,961,000\n  Luxury tax line:     $200,428,000\n  First apron:         $209,015,000\n  Second apron:        $221,686,000\n  Non-taxpayer MLE:    $15,044,000\n  Taxpayer MLE:        $6,064,000\n  Room exception:      $9,366,000\n  Tax bracket width:   $6,064,000\n  Bi-annual exception: $5,477,000\n\nMEMPHIS -- 2026-27 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Luka Cordero | $5,512,174 | -- | 1 |\n| Brennan Cordero | $6,504,785 | -- | 1 |\n| Trey Ferreira | $7,188,214 | -- | 3 |\n| Rashad Rees | $5,234,240 | -- | 2 |\n| Jalil Reddish | $3,849,529 | -- | 1 |\n| Goran Ellington | $8,343,435 | -- | 3 |\n| Malik Jokubaitis | $21,165,693 | -- | 3 |\n| Alperen Ferreira | $14,970,972 | -- | 3 |\n| Deni Whitfield | $17,420,215 | -- | 3 |\n| Nico Whitfield | $50,508,426 | -- | 1 |\n| Goran Beauchamp | $3,604,868 | -- | 4 |\n| Kellen Osei | $46,184,191 | -- | 2 |\n| Andre Sabonis | $20,612,495 | -- | 4 |\n| Nico Duval | $6,448,326 | -- | 2 |\n\nRoster count: 14\nHard cap: second apron\n\nWe're hard-capped at the second apron. Can we add Cam Amadi at $3,362,774?",
+    "verdict": "LEGAL",
+    "season": "2026-27",
+    "answer_facts": {
+      "legal": true,
+      "hard_cap": "second apron",
+      "hard_cap_limit": 221686000,
+      "room_below_hard_cap": 4138437,
+      "salary": 3362774,
+      "apron_salary_after": 220910337,
+      "reasons": []
+    },
+    "required_values": [
+      3362774,
+      221686000
+    ],
+    "allowed_values": [
+      2026,
+      775663,
+      3362774,
+      3604868,
+      3849529,
+      4138437,
+      5234240,
+      5477000,
+      5512174,
+      6064000,
+      6448326,
+      6504785,
+      7188214,
+      8343435,
+      9366000,
+      14970972,
+      15044000,
+      17420215,
+      20612495,
+      21165693,
+      46184191,
+      50508426,
+      164961000,
+      200428000,
+      209015000,
+      217547563,
+      220910337,
+      221686000
+    ]
+  },
+  {
+    "kind": "exception_survey",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nBROOKLYN -- 2024-25 CAP SHEET\nplayer,salary,unlikely_incentives,years_remaining\nRashad Achiuwa,2567302,0,3\nNico Novak,7178301,0,3\nCorey Rees,7014063,0,1\nLuka Ferreira,40358746,0,2\nIsaiah Duval,31523320,0,2\nCorey Dumont,7992525,0,3\nAmari Vasquez,22798036,0,2\nElijah Petrov,2533994,0,2\nZion Petrov,4863608,0,4\nJalil Whitfield,3115792,0,2\nLuka Whitfield,3313624,0,1\nDante Amadi,10855714,0,3\nGoran Halvorsen,6717354,0,4\n\nRoster count: 13\n\nWhich exceptions can we actually use at this payroll?",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "apron_level": "under the tax line",
+      "exceptions": [
+        {
+          "name": "non-taxpayer mid-level exception",
+          "available": true,
+          "amount": 12822000,
+          "reason": "available at $12,822,000; using it hard-caps the team at the first apron",
+          "hard_cap": "first apron"
+        },
+        {
+          "name": "taxpayer mid-level exception",
+          "available": true,
+          "amount": 5168000,
+          "reason": "available at $5,168,000; using it hard-caps the team at the second apron",
+          "hard_cap": "second apron"
+        },
+        {
+          "name": "bi-annual exception",
+          "available": true,
+          "amount": null,
+          "reason": "available, but the published amount for this season is not on file",
+          "hard_cap": "first apron"
+        },
+        {
+          "name": "room exception",
+          "available": false,
+          "amount": null,
+          "reason": "only available to a team operating under the cap",
+          "hard_cap": "none"
+        },
+        {
+          "name": "minimum salary exception",
+          "available": true,
+          "amount": null,
+          "reason": "always available at any apron level; triggers no hard cap",
+          "hard_cap": "none"
+        }
+      ]
+    },
+    "required_values": [],
+    "allowed_values": [
+      2024,
+      5168000,
+      7983000,
+      12822000,
+      140588000,
+      150832379,
+      170814000,
+      178132000,
+      188931000,
+      253399402,
+      256730203,
+      311579202,
+      331362401,
+      486360804,
+      671735404,
+      701406301,
+      717830103,
+      799252503,
+      1085571403,
+      2279803602,
+      3152332002,
+      4035874602
+    ]
+  },
+  {
+    "kind": "exception_survey",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nORLANDO -- 2024-25 CAP SHEET\nLuka Nakamura          $4,926,949\nMicah Sabonis         $26,336,274\nCorey Boateng          $5,271,475\nAmari Nakamura         $8,423,441\nKellen Ibarra         $48,505,923\nAmari Osei             $6,853,816\nBogdan Achiuwa         $5,165,875\nMarcus Novak           $6,027,238\nGoran Osei             $6,440,964\nLuka Rees              $5,147,151\nSanti Lindqvist       $18,001,845\nJaylen Cordero         $7,482,698\nZion Kalinic           $9,356,888\n\nRoster count: 13\n\nWhich exceptions can we actually use at this payroll?",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "apron_level": "under the tax line",
+      "exceptions": [
+        {
+          "name": "non-taxpayer mid-level exception",
+          "available": true,
+          "amount": 12822000,
+          "reason": "available at $12,822,000; using it hard-caps the team at the first apron",
+          "hard_cap": "first apron"
+        },
+        {
+          "name": "taxpayer mid-level exception",
+          "available": true,
+          "amount": 5168000,
+          "reason": "available at $5,168,000; using it hard-caps the team at the second apron",
+          "hard_cap": "second apron"
+        },
+        {
+          "name": "bi-annual exception",
+          "available": true,
+          "amount": null,
+          "reason": "available, but the published amount for this season is not on file",
+          "hard_cap": "first apron"
+        },
+        {
+          "name": "room exception",
+          "available": false,
+          "amount": null,
+          "reason": "only available to a team operating under the cap",
+          "hard_cap": "none"
+        },
+        {
+          "name": "minimum salary exception",
+          "available": true,
+          "amount": null,
+          "reason": "always available at any apron level; triggers no hard cap",
+          "hard_cap": "none"
+        }
+      ]
+    },
+    "required_values": [],
+    "allowed_values": [
+      2024,
+      4926949,
+      5147151,
+      5165875,
+      5168000,
+      5271475,
+      6027238,
+      6440964,
+      6853816,
+      7482698,
+      7983000,
+      8423441,
+      9356888,
+      12822000,
+      18001845,
+      26336274,
+      48505923,
+      140588000,
+      157940537,
+      170814000,
+      178132000,
+      188931000
+    ]
+  },
+  {
+    "kind": "tax_bill",
+    "prompt": "2026-27 LEAGUE THRESHOLDS\n  Salary cap:          $164,961,000\n  Luxury tax line:     $200,428,000\n  First apron:         $209,015,000\n  Second apron:        $221,686,000\n  Non-taxpayer MLE:    $15,044,000\n  Taxpayer MLE:        $6,064,000\n  Room exception:      $9,366,000\n  Tax bracket width:   $6,064,000\n  Bi-annual exception: $5,477,000\n\nINDIANA -- 2026-27 CAP SHEET\nCorey Reddish           $57,736,350\nDarnell Brantley        $12,517,742\nJulian Nakamura         $10,241,355\nCorey Whitfield         $36,695,463\nKellen Cordero          $11,610,144\nDevonte Nakamura        $10,564,937\nDeni Vasquez             $4,242,539\nBogdan Halvorsen         $8,284,141\nIsaiah Novak            $11,334,524\nJaylen Ibarra            $8,301,422\nTerrance Reddish         $7,868,141\nJaylen Nakamura         $23,740,100\nBrennan Ellington        $7,608,672\n\nRoster count: 13\n\nWhat's our luxury tax bill this season? Walk me through the brackets.",
+    "verdict": null,
+    "season": "2026-27",
+    "answer_facts": {
+      "tax_salary": 210745530,
+      "tax_line": 200428000,
+      "amount_over": 10317530,
+      "is_repeater": false,
+      "total": 11380912,
+      "brackets": [
+        {
+          "index": 1,
+          "amount": 6064000,
+          "rate": 1.0,
+          "owed": 6064000
+        },
+        {
+          "index": 2,
+          "amount": 4253530,
+          "rate": 1.25,
+          "owed": 5316912
+        }
+      ]
+    },
+    "required_values": [
+      11380912,
+      10317530
+    ],
+    "allowed_values": [
+      2026,
+      4242539,
+      4253530,
+      5316912,
+      5477000,
+      6064000,
+      7608672,
+      7868141,
+      8284141,
+      8301422,
+      9366000,
+      10241355,
+      10317530,
+      10564937,
+      11334524,
+      11380912,
+      11610144,
+      12517742,
+      15044000,
+      23740100,
+      36695463,
+      57736350,
+      164961000,
+      200428000,
+      209015000,
+      210745530,
+      221686000
+    ]
+  },
+  {
+    "kind": "scenario_planning",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nWASHINGTON -- 2024-25 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Jaylen Osei | $38,341,955 | -- | 2 |\n| Goran Jokubaitis | $7,321,479 | -- | 1 |\n| Terrance Sabonis | $29,377,764 | -- | 2 |\n| Santi Petrov | $8,543,073 | -- | 2 |\n| Elijah Kearns | $7,294,968 | -- | 4 |\n| Tobias Reddish | $8,948,280 | -- | 2 |\n| Bogdan Beauchamp | $2,627,502 | -- | 1 |\n| Malik Amadi | $4,034,590 | -- | 4 |\n| Dante Ellington | $5,058,059 | -- | 1 |\n| Devonte Petrov | $5,577,529 | -- | 4 |\n| Tobias Ibarra | $3,536,764 | -- | 1 |\n| Rashad Vasquez | $2,405,317 | -- | 1 |\n| Isaiah Amadi | $28,051,930 | -- | 4 |\n| Bogdan Rees | $48,315,308 | -- | 1 |\n| Terrance Okoro | $3,560,533 | -- | 4 |\n\nRoster count: 15\n\nWhat's the cleanest path under the second apron from here?",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "apron_salary": 202995051,
+      "second_apron": 188931000,
+      "overage": 14064051,
+      "aggregation_banned": true,
+      "cash_banned": true,
+      "single_salary_solutions": [
+        {
+          "player": "Isaiah Amadi",
+          "salary": 28051930,
+          "surplus": 13987879
+        },
+        {
+          "player": "Terrance Sabonis",
+          "salary": 29377764,
+          "surplus": 15313713
+        },
+        {
+          "player": "Jaylen Osei",
+          "salary": 38341955,
+          "surplus": 24277904
+        },
+        {
+          "player": "Bogdan Rees",
+          "salary": 48315308,
+          "surplus": 34251257
+        }
+      ]
+    },
+    "required_values": [
+      14064051
+    ],
+    "allowed_values": [
+      2024,
+      2405317,
+      2627502,
+      3536764,
+      3560533,
+      4034590,
+      5058059,
+      5168000,
+      5577529,
+      7294968,
+      7321479,
+      7983000,
+      8543073,
+      8948280,
+      12822000,
+      13987879,
+      14064051,
+      15313713,
+      24277904,
+      28051930,
+      29377764,
+      34251257,
+      38341955,
+      48315308,
+      140588000,
+      170814000,
+      178132000,
+      188931000,
+      202995051
+    ]
+  },
+  {
+    "kind": "hard_cap_consequence",
+    "prompt": "2026-27 LEAGUE THRESHOLDS\n  Salary cap:          $164,961,000\n  Luxury tax line:     $200,428,000\n  First apron:         $209,015,000\n  Second apron:        $221,686,000\n  Non-taxpayer MLE:    $15,044,000\n  Taxpayer MLE:        $6,064,000\n  Room exception:      $9,366,000\n  Tax bracket width:   $6,064,000\n  Bi-annual exception: $5,477,000\n\nPORTLAND -- 2026-27 CAP SHEET\nMarcus Cordero           $36,106,962\nSanti Osei                $7,529,793\nTrey Rees                $29,335,365\nJaylen Rees               $7,908,077\nBrennan Jokubaitis        $8,696,021\nTrey Jokubaitis           $5,530,948\nMarcus Lindqvist          $5,017,744\nBogdan Sabonis            $4,120,924\nKristaps Sabonis          $7,293,899\nJaylen Ibarra             $8,506,212\nDante Lindqvist          $11,049,559\nAmari Rees               $57,736,350\nMicah Boateng            $10,719,428\nRashad Okoro              $4,803,082\n\nRoster count: 14\nHard cap: first apron\n\nWe're hard-capped at the first apron. Can we add Amari Amadi at $5,819,586?",
+    "verdict": "ILLEGAL",
+    "season": "2026-27",
+    "answer_facts": {
+      "legal": false,
+      "hard_cap": "first apron",
+      "hard_cap_limit": 209015000,
+      "room_below_hard_cap": 4660636,
+      "salary": 5819586,
+      "apron_salary_after": 210173950,
+      "reasons": [
+        "the signing would put Portland at $210,173,950, above its first apron hard cap of $209,015,000"
+      ]
+    },
+    "required_values": [
+      5819586,
+      209015000
+    ],
+    "allowed_values": [
+      2026,
+      1158950,
+      4120924,
+      4660636,
+      4803082,
+      5017744,
+      5477000,
+      5530948,
+      5819586,
+      6064000,
+      7293899,
+      7529793,
+      7908077,
+      8506212,
+      8696021,
+      9366000,
+      10719428,
+      11049559,
+      15044000,
+      29335365,
+      36106962,
+      57736350,
+      164961000,
+      200428000,
+      204354364,
+      209015000,
+      210173950,
+      221686000
+    ]
+  },
+  {
+    "kind": "apron_status",
+    "prompt": "2024-25 LEAGUE THRESHOLDS\n  Salary cap:          $140,588,000\n  Luxury tax line:     $170,814,000\n  First apron:         $178,132,000\n  Second apron:        $188,931,000\n  Non-taxpayer MLE:    $12,822,000\n  Taxpayer MLE:        $5,168,000\n  Room exception:      $7,983,000\n  Tax bracket width:   $5,168,000\n\nDETROIT -- 2024-25 CAP SHEET\n| Player | Salary | Unlikely incentives | Years left |\n| --- | ---: | ---: | ---: |\n| Julian Amadi | $7,200,739 | -- | 1 |\n| Terrance Reddish | $8,340,637 | -- | 4 |\n| Brennan Boateng | $20,797,422 | $333,333 | 2 |\n| Elijah Duval | $7,757,367 | -- | 4 |\n| Malik Ibarra | $16,285,372 | -- | 3 |\n| Jalil Ferreira | $19,060,834 | -- | 1 |\n| Trey Ferreira | $4,056,239 | -- | 4 |\n| Alperen Petrov | $49,205,800 | -- | 2 |\n| Kobe Sabonis | $10,228,505 | $333,333 | 2 |\n| Tobias Beauchamp | $9,417,032 | -- | 1 |\n| Dante Cordero | $7,011,770 | -- | 1 |\n| Dante Kearns | $11,162,254 | $333,334 | 3 |\n| Nikola Vasquez | $4,055,292 | -- | 2 |\n\nRoster count: 13\n\nAre we over the second apron? How much room do we have?",
+    "verdict": null,
+    "season": "2024-25",
+    "answer_facts": {
+      "tax_salary": 174579263,
+      "unlikely_incentives": 1000000,
+      "apron_salary": 175579263,
+      "apron_level": "over the tax line",
+      "room_to_first_apron": 2552737,
+      "room_to_second_apron": 13351737
+    },
+    "required_values": [
+      175579263
+    ],
+    "allowed_values": [
+      2024,
+      333333,
+      333334,
+      1000000,
+      2552737,
+      4055292,
+      4056239,
+      4765263,
+      5168000,
+      7011770,
+      7200739,
+      7757367,
+      7983000,
+      8340637,
+      9417032,
+      10228505,
+      11162254,
+      12822000,
+      13351737,
+      16285372,
+      19060834,
+      20797422,
+      49205800,
+      140588000,
+      170814000,
+      174579263,
+      175579263,
+      178132000,
+      188931000
+    ]
+  }
+]

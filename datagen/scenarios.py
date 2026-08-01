@@ -114,44 +114,50 @@ def player_name(rng: random.Random, taken: set[str] | None = None) -> str:
 
 
 def _salary_ladder(rng: random.Random, target: int, count: int, k: SeasonConstants) -> list[int]:
-    """Split a payroll into a plausible star/mid/minimum distribution."""
+    """Split a payroll into a plausible star/mid/minimum distribution.
+
+    Every salary has to land between the minimum and the 35% maximum -- no contract in the
+    league can exceed the max, and a roster carrying an impossible one undermines the whole
+    example. So the shape is drawn first, then scaled to hit the target payroll, then any
+    residual is spread across players who still have headroom rather than dumped on one.
+    """
     minimum = k.minimum_salary(2)
-    salaries: list[int] = []
-    remaining = target
-    remaining_slots = count
+    ceiling = k.max_salary_35
 
-    stars = rng.randint(1, 2)
-    for _ in range(stars):
-        if remaining_slots <= 1:
-            break
-        salary = rng.randint(int(k.max_salary_25 * 0.75), k.max_salary_35)
-        salary = min(salary, remaining - minimum * (remaining_slots - 1))
-        if salary < minimum:
-            break
-        salaries.append(salary)
-        remaining -= salary
-        remaining_slots -= 1
+    # Draw a plausible shape: a star or two, a few mid-sized deals, minimums behind them.
+    weights: list[float] = []
+    for _ in range(rng.randint(1, 2)):
+        weights.append(rng.uniform(0.75, 1.0) * ceiling)
+    for _ in range(rng.randint(2, 4)):
+        weights.append(rng.uniform(8_000_000, 30_000_000))
+    while len(weights) < count:
+        weights.append(rng.uniform(minimum, 9_000_000))
+    weights = weights[:count]
 
-    mids = rng.randint(2, 4)
-    for _ in range(mids):
-        if remaining_slots <= 1:
-            break
-        ceiling = max(minimum, remaining - minimum * (remaining_slots - 1))
-        salary = min(rng.randint(8_000_000, 30_000_000), ceiling)
-        if salary < minimum:
-            break
-        salaries.append(salary)
-        remaining -= salary
-        remaining_slots -= 1
+    scale = target / sum(weights)
+    salaries = [int(min(max(w * scale, minimum), ceiling)) for w in weights]
 
-    while remaining_slots > 1:
-        ceiling = max(minimum, remaining - minimum * (remaining_slots - 1))
-        salary = min(rng.randint(minimum, max(minimum + 1, 9_000_000)), ceiling)
-        salaries.append(salary)
-        remaining -= salary
-        remaining_slots -= 1
+    # Scaling and clamping leave a residual. Spread it over contracts with room to absorb it
+    # so the payroll lands exactly on target without creating an illegal salary.
+    for _ in range(200):
+        residual = target - sum(salaries)
+        if residual == 0:
+            break
+        movable = [
+            i for i, s in enumerate(salaries)
+            if (residual > 0 and s < ceiling) or (residual < 0 and s > minimum)
+        ]
+        if not movable:
+            break
+        share = residual // len(movable) or (1 if residual > 0 else -1)
+        for i in movable:
+            if residual == 0:
+                break
+            step = max(-(salaries[i] - minimum), min(share, ceiling - salaries[i]))
+            step = max(-abs(residual), min(step, abs(residual))) if residual > 0 else step
+            salaries[i] += step
+            residual -= step
 
-    salaries.append(max(remaining, 0))
     rng.shuffle(salaries)
     return salaries
 

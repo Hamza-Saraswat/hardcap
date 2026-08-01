@@ -47,6 +47,34 @@ def test_rosters_never_contain_duplicate_names():
         assert len(names) == len(set(names))
 
 
+def test_generated_salaries_are_legal_contracts():
+    """No contract may exceed the 35% maximum or fall below the minimum.
+
+    A roster carrying an impossible salary discredits the example even when the rules
+    reasoning applied to it is correct.
+    """
+    rng = random.Random(0)
+    for _ in range(300):
+        team = random_team(rng)
+        k = team.constants
+        for contract in team.contracts:
+            assert contract.salary <= k.max_salary_35, (
+                f"{contract.player} at ${contract.salary:,} exceeds the "
+                f"${k.max_salary_35:,} maximum"
+            )
+            assert contract.salary >= k.minimum_salary(2) - 1
+
+
+def test_generated_payroll_hits_its_target_tier():
+    """Clamping salaries must not knock a team out of the apron tier it was built for."""
+    from capengine.models import ApronLevel
+
+    rng = random.Random(1)
+    for level in ApronLevel:
+        for _ in range(40):
+            assert random_team(rng, level=level).apron_level is level
+
+
 def test_find_refuses_an_ambiguous_name():
     team = Team(
         name="Ambiguous",
