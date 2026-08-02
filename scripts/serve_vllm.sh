@@ -18,7 +18,14 @@ PORT="${3:-8000}"
 MODELS_DIR="${MODELS_DIR:-$HOME/hardcap-work/models}"
 IMAGE="${VLLM_IMAGE:-nvcr.io/nvidia/vllm:26.05.post1-py3}"
 
-exec docker run --rm --gpus all -p "$PORT:8000" \
+# A fixed container name makes teardown deterministic: `docker stop hardcap-vllm` kills
+# the actual server. Killing the tmux session that launched it does NOT -- that only kills
+# the docker client, and the orphaned server kept 81GB of unified memory while a training
+# run loaded 54GB of weights on top. The machine went down hard. Stop containers by name,
+# never by killing their terminal.
+docker rm -f hardcap-vllm >/dev/null 2>&1 || true
+
+exec docker run --rm --gpus all --name hardcap-vllm -p "$PORT:8000" \
     -v "$MODELS_DIR":/models -e HF_HOME=/models \
     -v "$HOME/hardcap":/workspace \
     --shm-size=16g \
