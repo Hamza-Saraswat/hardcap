@@ -26,6 +26,7 @@ IMAGE="${VLLM_IMAGE:-nvcr.io/nvidia/vllm:26.05.post1-py3}"
 docker rm -f hardcap-vllm >/dev/null 2>&1 || true
 
 exec docker run --rm --gpus all --name hardcap-vllm -p "$PORT:8000" \
+    --memory=85g --memory-swap=85g \
     -v "$MODELS_DIR":/models -e HF_HOME=/models \
     -v "$HOME/hardcap":/workspace \
     --shm-size=16g \
