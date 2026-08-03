@@ -128,8 +128,27 @@ Players in the training data are invented. Attaching fabricated salaries to real
 would teach the model false facts about the league, which is the exact failure this
 architecture exists to avoid. Real names appear only in the tests, with their real figures.
 
-## Status
+## Results
 
-CapEngine, the data pipeline, and a 6,000-example verified dataset are done. Training,
-evaluation, and serving scripts are written and ready to run; nothing has been executed on a
-Spark yet. Background in [docs/research/](docs/research/).
+Trained on a DGX Spark (Qwen3.6-27B, BF16 LoRA r=32, 2 epochs, ~8.5h). Scored on 499
+held-out questions against CapEngine's ground truth, thinking disabled, temperature 0:
+
+| Measure | Base Qwen3.6-27B | Fine-tune (full-seq loss) | **Fine-tune (response-masked)** |
+|---|---|---|---|
+| Verdict accuracy | 58.0% | 26.1% | **78.0%** |
+| Arithmetic (exact figures) | 53.5% | 41.9% | **54.3%** |
+| Grounding (no invented figures) | 3.8% | 35.3% | **31.7%** |
+| Staleness probes | 3.4% | 32.2% | **32.2%** |
+
+The middle column is the honest lesson: the first run spread loss over the whole rendered
+text, spending ~90% of the gradient on boilerplate and random cap-sheet salaries. Masking
+loss to response tokens only — one flag — was worth +52 verdict points.
+
+Where the model is now strong: rule application (exception eligibility 97.8% verdicts / 100%
+arithmetic; buyouts, draft penalties, exception surveys at or near 100%). Where it is weak:
+chained arithmetic (multi-bracket tax bills), the known structural weakness of LLMs doing
+multi-step multiplication internally — the v2 answer is tool use, and CapEngine already is
+that calculator. Per-example scores live in `eval/results/`.
+
+The three-way debugging story — including the run that took the whole machine down — is in
+[docs/journey.md](docs/journey.md). Research background in [docs/research/](docs/research/).
