@@ -1,0 +1,82 @@
+==============================================================================
+PROMPT (what a GM would paste)
+==============================================================================
+2026-27 LEAGUE THRESHOLDS
+  Salary cap:          $164,961,000
+  Luxury tax line:     $200,428,000
+  First apron:         $209,015,000
+  Second apron:        $221,686,000
+  Non-taxpayer MLE:    $15,044,000
+  Taxpayer MLE:        $6,064,000
+  Room exception:      $9,366,000
+  Tax bracket width:   $6,064,000
+  Bi-annual exception: $5,477,000
+
+DENVER -- 2026-27 CAP SHEET
+| Player | Salary | Unlikely incentives | Years left |
+| --- | ---: | ---: | ---: |
+| Rashad Stavros | $5,345,914 | -- | 3 |
+| Brennan Vasquez | $2,922,576 | -- | 2 |
+| Nico Vasquez | $13,108,871 | -- | 1 |
+| Kellen Ibarra | $10,376,003 | -- | 2 |
+| Santi Beauchamp | $45,691,530 | -- | 4 |
+| Jaylen Cordero | $28,862,283 | -- | 4 |
+| Nico Ferreira | $4,147,885 | -- | 2 |
+| Brennan Kalinic | $21,452,212 | -- | 2 |
+| Julian Stavros | $8,918,029 | -- | 3 |
+| Santi Nakamura | $3,103,700 | -- | 4 |
+| Terrance Ibarra | $6,339,916 | -- | 1 |
+| Rashad Lindqvist | $6,779,767 | -- | 4 |
+| Tobias Sabonis | $54,294,627 | -- | 3 |
+| Jalil Amadi | $6,242,687 | -- | 4 |
+| Spencer Jones | $6,000,000 | -- | 2 |
+
+Roster count: 15
+Repeater taxpayer: yes
+
+We're a repeater and we just matched Spencer Jones's offer sheet, which put us over the second apron. Ownership wants a path back under before the deadline. What are our options, and can we package two of the smaller contracts together to do it?
+
+==============================================================================
+CAPOLOGIST ANSWER
+==============================================================================
+We are over the second apron, at $223,585,999. We have $14,570,999 of space above the first apron. Against the second apron it is $1,899,999 over. That is the line that matters. Over the second apron we lose aggregation in trades and we lose the ability to send cash. So two small contracts going out is the shape of the answer, and the good news is that it is a genuinely small problem: $1,899,999 is one contract with minimal talent attached, and we are already paying the repeater rate, so the tax saving is the smallest bracket on the schedule. The thing I would push on is the timing. We are at 15 players, which means the fix has to come with nothing coming back, and that is a worse version of the same solution in February than it is today. My advice is solve it now, with a minimum contract and a sweetener, and keep the aggregated version for a deadline need that is real rather than theoretical.
+
+==============================================================================
+VERIFICATION AGAINST CAPENGINE
+==============================================================================
+all figures grounded: NO
+figures not computable from the sheet: $1,899,999, $14,570,999, $223,585,999
+missed the key figure: $1,900,000
+
+ground truth for comparison:
+  1. Denver apron salary = $223,586,000
+  2. 2026-27 second apron = $221,686,000
+  3. Amount over the second apron = $1,900,000
+  4. Aggregation unavailable (over the second apron, two salaries cannot be combined in one trade)
+  5. Cash unavailable (no cash may be sent in any trade)
+  6. Moving Brennan Vasquez alone clears it = $1,022,576 ($2,922,576 out with nothing back)
+  7. Moving Santi Nakamura alone clears it = $1,203,700 ($3,103,700 out with nothing back)
+  8. Moving Nico Ferreira alone clears it = $2,247,885 ($4,147,885 out with nothing back)
+  9. Moving Rashad Stavros alone clears it = $3,445,914 ($5,345,914 out with nothing back)
+  10. Moving Spencer Jones alone clears it = $4,100,000 ($6,000,000 out with nothing back)
+  11. Moving Jalil Amadi alone clears it = $4,342,687 ($6,242,687 out with nothing back)
+  12. Moving Terrance Ibarra alone clears it = $4,439,916 ($6,339,916 out with nothing back)
+  13. Moving Rashad Lindqvist alone clears it = $4,879,767 ($6,779,767 out with nothing back)
+  14. Moving Julian Stavros alone clears it = $7,018,029 ($8,918,029 out with nothing back)
+  15. Moving Kellen Ibarra alone clears it = $8,476,003 ($10,376,003 out with nothing back)
+  16. Moving Nico Vasquez alone clears it = $11,208,871 ($13,108,871 out with nothing back)
+  17. Moving Brennan Kalinic alone clears it = $19,552,212 ($21,452,212 out with nothing back)
+  18. Moving Jaylen Cordero alone clears it = $26,962,283 ($28,862,283 out with nothing back)
+  19. Moving Santi Beauchamp alone clears it = $43,791,530 ($45,691,530 out with nothing back)
+  20. Moving Tobias Sabonis alone clears it = $52,394,627 ($54,294,627 out with nothing back)
+  21. Denver tax salary = $223,586,000
+  22. 2026-27 luxury tax line = $200,428,000
+  23. Amount over the tax line = $23,158,000 ($223,586,000 - $200,428,000)
+  24. Rate schedule: repeater (2026-27) (rates rise $0.50 per bracket beyond the published four)
+  25. Bracket 1: $6,064,000 at $3.00 per dollar = $18,192,000
+  26. Bracket 2: $6,064,000 at $3.25 per dollar = $19,708,000
+  27. Bracket 3: $6,064,000 at $5.50 per dollar = $33,352,000
+  28. Bracket 4: $4,966,000 at $6.75 per dollar = $33,520,500
+  29. Total luxury tax owed = $104,772,500
+  30. Repeater status applies (paid the tax in 3 of the prior 4 seasons)
+  31. Tax distribution forfeited (taxpayers receive no share of the 50% distributed to non-taxpaying teams)
