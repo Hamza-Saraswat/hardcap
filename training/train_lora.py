@@ -221,6 +221,33 @@ def train(
         ),
     )
 
+    # Mask everything but the assistant's answers. Without this, loss spreads over the
+    # whole rendered text -- and in this dataset ~3/4 of the tokens are the system prompt
+    # (identical every row, trivially memorized) and pasted cap sheets (random salaries,
+    # i.e. noise). The first full-sequence run converged to 0.39 train loss and produced a
+    # model that had absorbed the phrasing but scrambled the reasoning and invented
+    # figures -- it had been *taught* to model plausible random dollar amounts. Response
+    # masking concentrates every gradient on the behavior we actually want.
+    if preset.chat_template is None:  # ChatML/Qwen-style templates
+        from unsloth.chat_templates import train_on_responses_only
+
+        trainer = train_on_responses_only(
+            trainer,
+            instruction_part="<|im_start|>user\n",
+            response_part="<|im_start|>assistant\n",
+        )
+        batch = next(iter(trainer.get_train_dataloader()))
+        kept = (batch["labels"] != -100).float().mean().item()
+        print(f"  response-only masking active: {kept:.1%} of tokens carry loss")
+        if kept > 0.6:
+            raise SystemExit(
+                "Masking looks ineffective (most tokens still carry loss) -- "
+                "check the instruction/response markers against the chat template."
+            )
+    else:
+        print("  NOTE: no response masking wired for this chat template; "
+              "full-sequence loss applies")
+
     print(f"  effective batch size {effective_batch}, "
           f"checkpointing every 50 steps to {output_dir}")
     trainer.train(resume_from_checkpoint=resume or None)
