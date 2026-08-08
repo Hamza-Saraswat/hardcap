@@ -19,7 +19,7 @@ import random
 import urllib.request
 
 from capengine.constants import get_season
-from capengine.models import Contract, Team
+from capengine.models import Contract
 from capengine.tax import compute_tax
 from capengine.trace import Trace, usd
 from datagen.capsheet import team_context
