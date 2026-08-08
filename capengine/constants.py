@@ -26,6 +26,10 @@ BASE_CAP_2023_24 = 136_021_000
 # Indexed bases, all published for 2023-24.
 _BASE_TRADE_BAND_LOWER = 7_500_000
 _BASE_TRADE_BAND_UPPER = 29_000_000
+# The CBA sets tax bracket spans at $5,000,000 for 2023-24 and indexes them with the cap
+# from 2024-25 onward, which reproduces the published $5,168,000 span for 2024-25. That the
+# result also equals the taxpayer mid-level each season is not a coincidence -- both index
+# from the same $5,000,000 base.
 _BASE_TAX_BRACKET_WIDTH = 5_000_000
 
 # Salary-matching percentages for a team below the first apron ("expanded TPE" rules).

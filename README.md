@@ -145,10 +145,19 @@ text, spending ~90% of the gradient on boilerplate and random cap-sheet salaries
 loss to response tokens only — one flag — was worth +52 verdict points.
 
 Where the model is now strong: rule application (exception eligibility 97.8% verdicts / 100%
-arithmetic; buyouts, draft penalties, exception surveys at or near 100%). Where it is weak:
-chained arithmetic (multi-bracket tax bills), the known structural weakness of LLMs doing
-multi-step multiplication internally — the v2 answer is tool use, and CapEngine already is
-that calculator. Per-example scores live in `eval/results/`.
+arithmetic; buyouts, draft penalties, exception surveys at or near 100%). Per-example scores
+live in `eval/results/`.
+
+Two known weaknesses, both reproducible:
+
+- **Chained arithmetic.** Multi-bracket tax bills score 4.7%. On a real Denver sheet it got
+  every rule right and still summed the payroll $617,500 wrong. This is the familiar limit of
+  doing multi-step multiplication in-weights; the fix is tool use, and CapEngine already is
+  that calculator.
+- **Enumeration without a cap sheet.** "Which exceptions do we have?" asked with no sheet
+  pasted can collapse into a repetition loop; the same question with a sheet answers cleanly.
+  Exception-survey training examples always carried a cap sheet, so the no-context version is
+  out of distribution. A repetition penalty does not fix it — more varied training data would.
 
 The three-way debugging story — including the run that took the whole machine down — is in
 [docs/journey.md](docs/journey.md). Research background in [docs/research/](docs/research/).
