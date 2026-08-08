@@ -128,8 +128,18 @@ def main() -> None:
         base_short=BASE_MODEL.split("/")[-1],
         repo=args.repo,
     )
-    (args.adapter / "README.md").write_text(card)
-    print(f"model card written to {args.adapter}/README.md")
+    card_path = args.adapter / "README.md"
+    try:
+        card_path.write_text(card)
+        print(f"model card written to {card_path}")
+    except PermissionError:
+        # Adapter directories get written by containers running as other users, so the
+        # card may not be rewritable from here. An existing card is fine; refusing to
+        # upload over a permissions detail would be the wrong call.
+        if card_path.exists():
+            print(f"cannot rewrite {card_path} (permission) -- using the existing card")
+        else:
+            sys.exit(f"Cannot write {card_path} and no card exists there. Fix ownership.")
 
     if args.dry_run:
         print("\n--- card preview ---\n")
