@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hardcap — NBA salary cap analyst</title>
+<style>
+  :root {
+    --bg: #0f1115; --panel: #171a21; --line: #262b36; --text: #e6e8ee;
+    --dim: #8b93a7; --accent: #4a9eff; --good: #3fb950; --bad: #f85149;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f7f9; --panel: #fff; --line: #e1e4e8; --text: #1a1d23;
+      --dim: #6a7280; --accent: #0969da; --good: #1a7f37; --bad: #cf222e;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.55 ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
+  }
+  header {
+    padding: 14px 20px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  }
+  h1 { font-size: 16px; margin: 0; letter-spacing: -.01em; }
+  .sub { color: var(--dim); font-size: 13px; }
+  #status { margin-left: auto; font-size: 12px; color: var(--dim); }
+  #status.ok { color: var(--good); }
+  #status.err { color: var(--bad); }
+  main { display: grid; grid-template-columns: minmax(320px, 420px) 1fr; gap: 0; height: calc(100vh - 53px); }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; height: auto; } }
+  .pane { padding: 16px 20px; overflow-y: auto; }
+  .pane + .pane { border-left: 1px solid var(--line); }
+  @media (max-width: 860px) { .pane + .pane { border-left: 0; border-top: 1px solid var(--line); } }
+  label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .06em;
+          color: var(--dim); margin: 0 0 6px; }
+  textarea {
+    width: 100%; background: var(--panel); color: var(--text);
+    border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px;
+    font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; resize: vertical;
+  }
+  textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  #sheet { height: 280px; }
+  #question { height: 90px; margin-bottom: 12px; }
+  .row { display: flex; gap: 8px; align-items: center; margin: 12px 0; flex-wrap: wrap; }
+  button {
+    background: var(--accent); color: #fff; border: 0; border-radius: 8px;
+    padding: 9px 16px; font-size: 14px; font-weight: 500; cursor: pointer;
+  }
+  button:disabled { opacity: .5; cursor: default; }
+  button.ghost { background: transparent; color: var(--dim); border: 1px solid var(--line); }
+  #answer {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+    padding: 16px 18px; white-space: pre-wrap; min-height: 200px;
+  }
+  #answer.placeholder { color: var(--dim); }
+  .note { color: var(--dim); font-size: 12px; margin-top: 14px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>hardcap</h1>
+  <span class="sub">NBA salary cap analyst &middot; Qwen3.6-27B fine-tune</span>
+  <span id="status">checking server…</span>
+</header>
+
+<main>
+  <section class="pane">
+    <label for="sheet">Cap sheet &mdash; paste real data here</label>
+    <textarea id="sheet" spellcheck="false"></textarea>
+
+    <div class="row">
+      <button class="ghost" id="loadExample">Load example (Denver, over 2nd apron)</button>
+    </div>
+
+    <label for="question">Question</label>
+    <textarea id="question" spellcheck="false">We need to get under the second apron before the deadline. What are our options, and can we package two smaller contracts together to do it?</textarea>
+
+    <div class="row">
+      <button id="ask">Ask</button>
+      <button class="ghost" id="stop" disabled>Stop</button>
+    </div>
+
+    <p class="note">
+      The model reasons from whatever numbers you paste &mdash; it does not look anything up.
+      Change a threshold and the answer changes with it.
+      <br><br>
+      Known limit: long chained arithmetic (multi-bracket tax bills) can drift by a dollar or
+      two. Rule reasoning is the strong part; verify big sums yourself.
+    </p>
+  </section>
+
+  <section class="pane">
+    <label>Answer</label>
+    <div id="answer" class="placeholder">Ask a question to see the analyst&rsquo;s reply.</div>
+  </section>
+</main>
+
+<script>
+const BASE = location.origin.includes(':8000') ? location.origin : 'http://192.168.0.180:8000';
+const MODEL = 'capologist';
+const SYSTEM = `You are a salary cap analyst for an NBA front office. You work under the 2023 Collective Bargaining Agreement, including the first and second apron system.
+
+How you work:
+
+- Salary and threshold figures come from the conversation, never from memory. Cap, tax, and apron levels change every July 1, and they do not move predictably -- the 2026-27 cap came in at 6.7% growth when the league maximum is 10%. If a figure you need has not been provided, ask for it rather than assuming one.
+- Show the arithmetic. State exact dollar figures with commas, not rounded approximations, and make each step checkable.
+- When a question has a yes or no answer, open with a bolded verdict line, then explain.
+- Name the specific rule that governs, and say which threshold triggers it.
+- Flag consequences the question did not ask about but a general manager would need to know: hard caps a move triggers, exceptions it forecloses, draft penalties it invites.
+- Be direct about uncertainty. If a situation turns on a fact not in evidence, say so.`;
+
+const EXAMPLE = `2026-27 LEAGUE THRESHOLDS
+  Salary cap:          $164,961,000
+  Luxury tax line:     $200,428,000
+  First apron:         $209,015,000
+  Second apron:        $221,686,000
+  Non-taxpayer MLE:    $15,044,000
+  Taxpayer MLE:        $6,064,000
+  Room exception:      $9,366,000
+  Tax bracket width:   $6,064,000
+  Bi-annual exception: $5,477,000
+
+DENVER -- 2026-27 CAP SHEET
+| Player | Salary | Unlikely incentives | Years left |
+| --- | ---: | ---: | ---: |
+| Nikola Jokic | $59,433,000 | -- | 3 |
+| Jamal Murray | $46,000,000 | -- | 2 |
+| Aaron Gordon | $25,600,000 | -- | 3 |
+| Christian Braun | $22,000,000 | -- | 4 |
+| Cameron Johnson | $20,500,000 | -- | 2 |
+| Peyton Watson | $14,000,000 | -- | 3 |
+| Spencer Jones | $6,000,000 | -- | 2 |
+| Julian Strawther | $5,200,000 | -- | 1 |
+| DaRon Holmes | $3,800,000 | -- | 2 |
+| Jalen Pickett | $2,900,000 | -- | 1 |
+| Hunter Tyson | $2,700,000 | -- | 1 |
+| Zeke Nnaji | $2,449,421 | -- | 1 |
+| Vlatko Cancar | $2,449,421 | -- | 1 |
+| Trey Alexander | $2,449,421 | -- | 1 |
+| Jay Huff | $2,449,421 | -- | 1 |
+
+Roster count: 15
+Repeater taxpayer: yes`;
+
+const $ = id => document.getElementById(id);
+let controller = null;
+
+async function checkServer() {
+  const s = $('status');
+  try {
+    const r = await fetch(BASE + '/v1/models', { signal: AbortSignal.timeout(4000) });
+    const j = await r.json();
+    const has = (j.data || []).some(m => m.id === MODEL);
+    s.textContent = has ? 'server ready' : 'server up, adapter missing';
+    s.className = has ? 'ok' : 'err';
+  } catch {
+    s.textContent = 'server not reachable — is it running on the Spark?';
+    s.className = 'err';
+  }
+}
+
+$('loadExample').onclick = () => { $('sheet').value = EXAMPLE; };
+
+$('stop').onclick = () => { if (controller) controller.abort(); };
+
+$('ask').onclick = async () => {
+  const sheet = $('sheet').value.trim();
+  const question = $('question').value.trim();
+  if (!question) return;
+
+  const out = $('answer');
+  out.className = '';
+  out.textContent = '';
+  $('ask').disabled = true;
+  $('stop').disabled = false;
+  controller = new AbortController();
+
+  const content = sheet ? sheet + '\n\n' + question : question;
+
+  try {
+    const res = await fetch(BASE + '/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [
+          { role: 'system', content: SYSTEM },
+          { role: 'user', content }
+        ],
+        temperature: 0,
+        max_tokens: 1600,
+        stream: true,
+        chat_template_kwargs: { enable_thinking: false }
+      })
+    });
+
+    if (!res.ok) throw new Error('HTTP ' + res.status + ' — ' + (await res.text()).slice(0, 200));
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const payload = line.slice(6).trim();
+        if (payload === '[DONE]') continue;
+        try {
+          const delta = JSON.parse(payload).choices?.[0]?.delta?.content;
+          if (delta) out.textContent += delta;
+        } catch { /* partial frame; wait for more */ }
+      }
+    }
+  } catch (e) {
+    out.textContent += (e.name === 'AbortError') ? '\n\n[stopped]' : '\n\n[error] ' + e.message;
+  } finally {
+    $('ask').disabled = false;
+    $('stop').disabled = true;
+    controller = null;
+  }
+};
+
+checkServer();
+setInterval(checkServer, 15000);
+</script>
+</body>
+</html>
