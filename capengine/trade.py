@@ -88,15 +88,20 @@ class TradeResult:
 
 
 def max_incoming_expanded(outgoing: int, k: SeasonConstants) -> tuple[int, str]:
-    """Most salary a below-the-first-apron team may take back, and which band applied."""
+    """Most salary a below-the-first-apron team may take back, and which band applied.
+
+    Rounds rather than truncates. An odd salary times 1.25 lands on a half dollar, and
+    truncating there put the engine one cent below the calculator tool -- a discrepancy with
+    no basis in the rules that would have taught the model inconsistent arithmetic.
+    """
     if outgoing <= k.trade_band_lower:
-        allowed = int(outgoing * MATCH_SMALL_MULTIPLIER) + MATCH_CUSHION
+        allowed = round(outgoing * MATCH_SMALL_MULTIPLIER) + MATCH_CUSHION
         rule = f"200% + {usd(MATCH_CUSHION)} (outgoing at or below {usd(k.trade_band_lower)})"
     elif outgoing <= k.trade_band_upper:
         allowed = outgoing + k.trade_band_lower
         rule = f"outgoing + {usd(k.trade_band_lower)} (middle band)"
     else:
-        allowed = int(outgoing * MATCH_LARGE_MULTIPLIER) + MATCH_CUSHION
+        allowed = round(outgoing * MATCH_LARGE_MULTIPLIER) + MATCH_CUSHION
         rule = f"125% + {usd(MATCH_CUSHION)} (outgoing above {usd(k.trade_band_upper)})"
     return allowed, rule
 
