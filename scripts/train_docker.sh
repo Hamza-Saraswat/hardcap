@@ -44,6 +44,13 @@ if [ "$AVAIL_GB" -lt "$NEED_GB" ]; then
 fi
 echo "preflight ok: no containers running, ${AVAIL_GB}GB available (need ${NEED_GB}GB)"
 
+# Containers write as their own user, so a directory left behind by an earlier run can be
+# unwritable by the next one. This has now bitten three times -- the model cache, the
+# adapter, and a run that trained perfectly for 40 steps and then died saving a README.
+# Make the output and log trees writable before starting rather than discovering it at the
+# first checkpoint.
+chmod -R a+rwX "$REPO/outputs" "$REPO/logs" 2>/dev/null || true
+
 echo "logging to $LOG"
 # --entrypoint python matters: the image's default entrypoint ignores the command and
 # boots a supervisord stack (Jupyter, sshd, Ollama) that idles forever. Discovered the
