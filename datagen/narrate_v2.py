@@ -12,7 +12,6 @@ construction, so an answer quoting them is grounded in the strongest possible se
 
 from __future__ import annotations
 
-
 import random
 
 from capengine.trace import usd

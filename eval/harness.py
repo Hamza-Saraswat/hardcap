@@ -31,6 +31,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from datagen.verify import dollar_figures
+from eval import agent_loop
 
 # Reasoning models (Qwen3.6 among them) emit <think>...</think> before the answer. Scoring
 # must see only the answer: a verdict stated inside the thinking is not a verdict given to
@@ -62,6 +63,8 @@ class Score:
     invented: list[int] = field(default_factory=list)
     response: str = ""
     prompt: str = ""
+    tool_calls: int = 0
+    hit_tool_limit: bool = False
 
     @property
     def arithmetic_ok(self) -> bool:
@@ -123,6 +126,34 @@ def score_response(row: dict, response: str) -> Score:
 
 
 # -- model clients -------------------------------------------------------------------------
+
+
+def post_chat(
+    base_url: str,
+    model: str,
+    messages: list[dict],
+    tools: list[dict] | None = None,
+    disable_thinking: bool = False,
+) -> dict:
+    """One chat call, returning the raw assistant message so tool_calls survive."""
+    body: dict = {
+        "model": model,
+        "messages": messages,
+        "temperature": 0,
+        "max_tokens": 1600,
+    }
+    if tools:
+        body["tools"] = tools
+    if disable_thinking:
+        body["chat_template_kwargs"] = {"enable_thinking": False}
+
+    request = urllib.request.Request(
+        f"{base_url.rstrip('/')}/chat/completions",
+        data=json.dumps(body).encode(),
+        headers={"Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(request, timeout=600) as response:
+        return json.loads(response.read())["choices"][0]["message"]
 
 
 def call_openai_compatible(
@@ -249,6 +280,8 @@ def main() -> None:
                         help="parallel requests; vLLM batches these efficiently")
     parser.add_argument("--disable-thinking", action="store_true",
                         help="ask Qwen-style chat templates not to emit thinking blocks")
+    parser.add_argument("--tools", action="store_true",
+                        help="offer the calculator and run the tool exchange to completion")
     args = parser.parse_args()
 
     if not args.model and not args.baseline:
@@ -274,6 +307,24 @@ def main() -> None:
     def answer(row: dict) -> Score:
         system = row["messages"][0]["content"]
         user = row["messages"][1]["content"]
+
+        if args.tools and not args.baseline:
+            # Drive the calculator exchange to completion and score the text a user would
+            # actually see. Scoring the first response would grade an empty message that
+            # happens to contain a function call.
+            def send(messages, tools):
+                return post_chat(args.base_url, args.model, messages, tools,
+                                 disable_thinking=args.disable_thinking)
+
+            turn = agent_loop.run(
+                send,
+                [{"role": "system", "content": system}, {"role": "user", "content": user}],
+            )
+            score = score_response(row, turn.final_text)
+            score.tool_calls = len(turn.tool_calls)
+            score.hit_tool_limit = turn.hit_limit
+            return score
+
         response = (
             call_anthropic(args.baseline, system, user)
             if args.baseline
@@ -316,6 +367,8 @@ def main() -> None:
                     "required_hit": score.required_hit,
                     "required_total": score.required_total,
                     "invented": score.invented,
+                    "tool_calls": score.tool_calls,
+                    "hit_tool_limit": score.hit_tool_limit,
                     # Carried through so error analysis can ask whether a flagged figure was
                     # fabricated or merely derived from figures the model was handed. Without
                     # it every flagged value looks equally invented, which is how the first
