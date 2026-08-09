@@ -12,7 +12,7 @@ construction, so an answer quoting them is grounded in the strongest possible se
 
 from __future__ import annotations
 
-import json
+
 import random
 
 from capengine.trace import usd
@@ -240,7 +240,13 @@ def narrate_v2(scenario: Scenario, rng: random.Random) -> str:
 
 
 def tool_messages(scenario) -> list[dict]:
-    """Render a tool scenario's call/result sequence as chat messages."""
+    """Render a tool scenario's call/result sequence as chat messages.
+
+    `arguments` must be a dict, not the JSON string the OpenAI API uses. Qwen's chat
+    template iterates the argument mapping to emit `<parameter=...>` tags, so a string
+    silently renders `<function=calc>` with no parameters at all -- a call the model would
+    learn to make and that would never do anything.
+    """
     messages: list[dict] = []
     for index, turn in enumerate(scenario.tool_turns):
         messages.append({
@@ -251,7 +257,7 @@ def tool_messages(scenario) -> list[dict]:
                 "type": "function",
                 "function": {
                     "name": "calc",
-                    "arguments": json.dumps({"expression": turn["expression"]}),
+                    "arguments": {"expression": turn["expression"]},
                 },
             }],
         })
