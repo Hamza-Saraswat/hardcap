@@ -18,3 +18,4 @@ outputs/
 # Fetched cap sheets: public facts, but the compilation is capsheets.com's and the HF
 # dataset's work. Run the fetchers yourself rather than redistributing their corpus.
 data/capsheets/
+data/dataset_v2/

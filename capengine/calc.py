@@ -110,7 +110,7 @@ def calc(expression: str) -> CalcResult:
 
     # Money lands on whole dollars; keep floats only when a genuine fraction survives.
     if isinstance(value, float) and abs(value - round(value)) < 1e-6:
-        value = int(round(value))
+        value = round(value)
     return CalcResult(expression=cleaned, value=value)
 
 

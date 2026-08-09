@@ -211,8 +211,8 @@ def report(result: dict, label: str) -> str:
     # split between fabrication and arithmetic.
     lines += [
         "", "### By scenario type — calculator problem or grounding problem?", "",
-        "*Derivable is a floor: the checker tries simple operations only, so multi-step "
-        "arithmetic reads as non-derivable.*", "",
+        ("*Derivable is a floor: the checker tries simple operations only, so multi-step "
+         "arithmetic reads as non-derivable.*"), "",
         "| Scenario type | Flagged | Derivable (floor) | Read as |", "|---|---:|---:|---|",
     ]
     for kind_type, counts in sorted(
