@@ -308,7 +308,7 @@ def main() -> None:
     if args.out:
         args.out.parent.mkdir(parents=True, exist_ok=True)
         with args.out.open("w") as handle:
-            for score in scores:
+            for score, row in zip(scores, rows, strict=True):
                 handle.write(json.dumps({
                     "kind": score.kind,
                     "verdict_expected": score.verdict_expected,
@@ -316,6 +316,13 @@ def main() -> None:
                     "required_hit": score.required_hit,
                     "required_total": score.required_total,
                     "invented": score.invented,
+                    # Carried through so error analysis can ask whether a flagged figure was
+                    # fabricated or merely derived from figures the model was handed. Without
+                    # it every flagged value looks equally invented, which is how the first
+                    # analysis pass reported a meaningless 100% "not derivable".
+                    "allowed_values": row.get("allowed_values", []),
+                    "required_values": row.get("required_values", []),
+                    "prompt": score.prompt,
                     "response": score.response,
                 }) + "\n")
         print(f"\nPer-example scores written to {args.out}")
