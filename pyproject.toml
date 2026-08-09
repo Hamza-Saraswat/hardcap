@@ -5,7 +5,12 @@ description = "Fine-tuning a local LLM into a basketball salary-cap and apron sp
 requires-python = ">=3.12"
 dependencies = [
     "anthropic>=0.40",
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
     "pydantic>=2.9",
+    "pypdf>=6.15.0",
+    "python-multipart>=0.0.32",
+    "uvicorn[standard]>=0.52.1",
 ]
 
 [project.optional-dependencies]
