@@ -109,13 +109,13 @@ def extract_text(filename: str, raw: bytes) -> str:
             ) from None
         try:
             reader = PdfReader(io.BytesIO(raw))
-        except Exception:
+        except Exception:  # noqa: BLE001 -- pypdf raises many types on malformed input
             raise HTTPException(status_code=400, detail="Could not read that PDF.") from None
         return "\n".join((page.extract_text() or "") for page in reader.pages).strip()
 
     try:
         return raw.decode("utf-8", errors="replace").strip()
-    except Exception:
+    except Exception:  # noqa: BLE001 -- any decode failure is a bad upload, not a bug
         raise HTTPException(status_code=400, detail="Could not read that file.") from None
 
 
@@ -126,7 +126,8 @@ def health() -> dict:
 
 @app.post("/api/upload")
 async def upload(
-    file: UploadFile = File(...),
+    # File() in the signature is FastAPI's documented idiom, not a mutable default.
+    file: UploadFile = File(...),  # noqa: B008
     x_passcode: str | None = Header(default=None),
 ) -> dict:
     check_passcode(x_passcode)
