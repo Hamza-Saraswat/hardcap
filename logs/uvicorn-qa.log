@@ -1,0 +1,23 @@
+INFO:     Started server process [37124]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:7000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:61122 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61123 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61126 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61129 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61132 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61135 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61138 - "POST /api/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61139 - "POST /api/chat HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:61140 - "POST /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61143 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61142 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61141 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61144 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61145 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61158 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [37124]
