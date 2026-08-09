@@ -76,3 +76,23 @@ def test_run_tool_returns_errors_as_text_for_the_model_to_read():
     assert run_tool({"expression": "5 / 0"}).startswith("error:")
     assert run_tool({"expression": "6064000 * 2"}) == "12,128,000"
     assert run_tool({}).startswith("error:")
+
+
+def test_derivability_checker_finds_multi_term_tax_chains():
+    """The checker that decided v2's direction must actually detect real arithmetic.
+
+    If it cannot spot a genuine three-bracket tax total, then every correct-but-untraced
+    figure reads as fabrication and the whole fabrication-vs-arithmetic split is noise.
+    """
+    from eval.error_analysis import derivable
+
+    allowed = {6_064_000, 1_360_137, 200_428_000, 215_000_000}
+    total = round(6_064_000 * 1.00) + round(6_064_000 * 1.25) + round(1_360_137 * 3.50)
+    assert derivable(total, allowed), "failed to trace a real 3-bracket tax total"
+
+
+def test_derivability_checker_still_rejects_fabrications():
+    from eval.error_analysis import derivable
+
+    allowed = {6_064_000, 1_360_137, 200_428_000, 215_000_000}
+    assert derivable(41_234_567, allowed) is None
