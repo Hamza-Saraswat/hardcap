@@ -1,0 +1,15 @@
+INFO:     Started server process [35097]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:7000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:60694 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60695 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60699 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60699 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60699 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60711 - "POST /api/chat HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:60714 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60752 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60760 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60765 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60771 - "GET /api/health HTTP/1.1" 200 OK
