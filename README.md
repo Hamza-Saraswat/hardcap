@@ -148,7 +148,20 @@ Where the model is now strong: rule application (exception eligibility 97.8% ver
 arithmetic; buyouts, draft penalties, exception surveys at or near 100%). Per-example scores
 live in `eval/results/`.
 
-Two known weaknesses, both reproducible:
+### v2 in progress
+
+Error analysis on v1's per-example results (`docs/error-analysis-v1.md`) redirected the next
+round. The assumption going in was that most "invented" figures would turn out to be correct
+arithmetic the whitelist simply missed, so a calculator would fix grounding. It would not —
+only ~7% are derivable by simple operations, and that is a floor rather than a measurement.
+Grounding is a genuine model problem across every scenario type, so v2 addresses it with its
+own data slice rather than leaning on tools.
+
+v2 adds a `calc` tool (AST-evaluated, never `eval()`), 3,500 rows across five slices each
+traceable to a measured failure bucket, a GRPO pass graded by CapEngine, and a playground
+with multi-turn chat, cap-sheet upload, and feedback logging.
+
+Two known weaknesses of v1, both reproducible:
 
 - **Chained arithmetic.** Multi-bracket tax bills score 4.7%. On a real Denver sheet it got
   every rule right and still summed the payroll $617,500 wrong. This is the familiar limit of
