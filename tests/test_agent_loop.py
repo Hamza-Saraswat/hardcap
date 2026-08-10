@@ -114,3 +114,24 @@ def test_endless_calling_hits_the_limit_and_says_so():
     assert turn.hit_limit
     assert turn.rounds == 4
     assert isinstance(turn, AgentTurn)
+
+
+def test_followup_sends_arguments_as_a_json_string_not_a_dict():
+    """The API and the chat template want opposite formats for the same field.
+
+    vLLM validates `arguments` as a string and rejects a dict with a 422/400; the chat
+    template iterates it as a mapping and silently renders no parameters given a string.
+    Getting this backwards fails only on the loop's second round, so a single-shot test
+    would have passed while the whole eval died.
+    """
+    send = scripted(
+        {"content": "", "tool_calls": [
+            {"function": {"name": "calc", "arguments": {"expression": "2+2"}}}]},
+        {"content": "It is 4."},
+    )
+    run(send, [{"role": "user", "content": "q"}])
+    followup = send.seen[1]
+    assistant = next(m for m in followup if m.get("tool_calls"))
+    arguments = assistant["tool_calls"][0]["function"]["arguments"]
+    assert isinstance(arguments, str), "the API rejects a dict here"
+    assert json.loads(arguments) == {"expression": "2+2"}

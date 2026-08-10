@@ -104,7 +104,16 @@ def run(
                 {
                     "id": f"call_{round_index}_{i}",
                     "type": "function",
-                    "function": {"name": c["name"], "arguments": c["arguments"]},
+                    # JSON string, not a dict -- and note this is the exact opposite of what
+                    # the chat template wants when building *training* rows. The OpenAI
+                    # schema types `arguments` as a string and the server rejects a dict
+                    # outright; the template iterates the mapping and silently renders no
+                    # parameters if given a string. Same field, two formats, one asymmetry
+                    # that costs an hour if you assume they match.
+                    "function": {
+                        "name": c["name"],
+                        "arguments": json.dumps(c["arguments"]),
+                    },
                 }
                 for i, c in enumerate(calls)
             ],
