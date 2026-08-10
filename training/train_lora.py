@@ -125,9 +125,20 @@ def load_dataset(path: Path, tokenizer, limit: int | None = None):
     if limit:
         rows = rows[:limit]
 
+    # Every row renders WITH the tool spec, including the ~80% that never call it.
+    #
+    # Rendering only tool rows with it produced a train/inference mismatch that cost real
+    # accuracy: at serving time the calculator is offered on every question, so the model
+    # met a system prompt it had never seen on ordinary questions and reached for the tool
+    # anyway -- it called the calculator on 48.7% of questions when 17.7% needed one, and
+    # every scenario where it over-reached regressed against the previous version.
+    # Training with tools always present teaches the harder and more useful lesson: the
+    # calculator is there, and most questions do not need it.
+    from capengine.calc import TOOL_SPEC
+
     texts = [
         tokenizer.apply_chat_template(
-            row["messages"], tokenize=False, add_generation_prompt=False
+            row["messages"], tools=[TOOL_SPEC], tokenize=False, add_generation_prompt=False
         )
         for row in rows
     ]

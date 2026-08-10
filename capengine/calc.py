@@ -16,7 +16,9 @@ import ast
 import operator
 from dataclasses import dataclass
 
-MAX_EXPRESSION_LENGTH = 200
+# Long enough to sum a full 20-man roster in one call, which is the single most
+# error-prone arithmetic step in the domain and therefore the one that most needs the tool.
+MAX_EXPRESSION_LENGTH = 500
 MAX_ABS_VALUE = 10**15
 
 _BINARY = {

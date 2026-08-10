@@ -151,6 +151,28 @@ def tool_tax_bill(rng: random.Random) -> ToolScenario:
     k = team.constants
 
     turns: list[dict] = []
+
+    # Sum the roster with the tool FIRST. The original version started at the brackets,
+    # because CapEngine already knew the payroll -- so the model was taught to delegate the
+    # multiplication and then add fifteen contracts in its head. It got that sum wrong by
+    # $9,042,040 in evaluation, and since every later figure derives from it, the whole
+    # slice scored 0% arithmetic. The hardest arithmetic in the answer has to be a tool call
+    # too, not just the tidy part.
+    salaries = [c.cap_hit for c in team.contracts]
+    if team.dead_money:
+        salaries.append(team.dead_money)
+    payroll_expression = " + ".join(str(s) for s in salaries)
+    payroll = calc(payroll_expression)
+    assert round(payroll.value) == result.tax_salary, (
+        payroll.value, result.tax_salary
+    )
+    turns.append({"expression": payroll_expression, "result": payroll.rendered})
+
+    over_expression = f"{result.tax_salary} - {result.tax_line}"
+    over = calc(over_expression)
+    assert round(over.value) == result.amount_over
+    turns.append({"expression": over_expression, "result": over.rendered})
+
     running: list[str] = []
     for bracket in result.brackets:
         expression = f"{bracket.amount} * {bracket.rate:.2f}"

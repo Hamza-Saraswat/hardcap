@@ -61,7 +61,7 @@ def test_rejects_power_operator_as_a_cheap_dos():
 
 def test_rejects_oversized_and_empty_input():
     with pytest.raises(CalcError):
-        calc("1+" * 200 + "1")
+        calc("1+" * 400 + "1")  # past the 500-char cap that fits a full roster sum
     with pytest.raises(CalcError):
         calc("   ")
 
